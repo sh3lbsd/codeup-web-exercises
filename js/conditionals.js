@@ -135,5 +135,42 @@ var randomColor = colors[Math.floor(Math.random() * colors.length)];
  * HINT: The way we prompt for a value could be improved
  */
 
+function isNumeric(input) {
+    return !isNaN(input);
+}
+
+function createEvenOddMessage(number) {
+    return (number % 2 === 0) ? 'Number is even' : 'Number is odd'
+}
+
+function createNumberPlus100Message(number) {
+    return number + ' plus 100 is ' + (number + 100);
+}
+
+function createNegPosMessage(number) {
+    return (number < 0) ? 'Number is negative' : 'Number is positive';
+}
+
+function getUserNumAndInfo() {
+    var userWillEnterNumber = confirm('Click OK to enter a number');
+    var userNumber;
+    if (userWillEnterNumber) {
+        alert(userNumber);
+        if (isNumeric(userNumber)) {
+            // if the user input is a number
+            // alert even/odd message
+            alert(createEvenOddMessage(userNumber));
+            // alert number plus 100
+            alert(createNumberPlus100Message(userNumber));
+            // alert negative/positive message
+            alert(createNegPosMessage(userNumber));
+        } else {
+            // alert not a number
+            alert('Input is not a number!');
+        }
+    }
+}
+
+getUserNumAndInfo();
 
 })();
