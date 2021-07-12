@@ -151,26 +151,26 @@ function createNegPosMessage(number) {
     return (number < 0) ? 'Number is negative' : 'Number is positive';
 }
 
-function getUserNumAndInfo() {
-    var userWillEnterNumber = confirm('Click OK to enter a number');
-    var userNumber;
-    if (userWillEnterNumber) {
-        alert(userNumber);
-        if (isNumeric(userNumber)) {
-            // if the user input is a number
-            // alert even/odd message
-            alert(createEvenOddMessage(userNumber));
-            // alert number plus 100
-            alert(createNumberPlus100Message(userNumber));
-            // alert negative/positive message
-            alert(createNegPosMessage(userNumber));
-        } else {
-            // alert not a number
-            alert('Input is not a number!');
-        }
-    }
-}
-
-getUserNumAndInfo();
+// function getUserNumAndInfo() {
+//     var userWillEnterNumber = confirm('Click OK to enter a number');
+//     var userNumber;
+//     if (userWillEnterNumber) {
+//         alert(userNumber);
+//         if (isNumeric(userNumber)) {
+//             // if the user input is a number
+//             // alert even/odd message
+//             alert(createEvenOddMessage(userNumber));
+//             // alert number plus 100
+//             alert(createNumberPlus100Message(userNumber));
+//             // alert negative/positive message
+//             alert(createNegPosMessage(userNumber));
+//         } else {
+//             // alert not a number
+//             alert('Input is not a number!');
+//         }
+//     }
+// }
+//
+// getUserNumAndInfo();
 
 })();
