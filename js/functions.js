@@ -111,6 +111,7 @@
 // function applyDiscount(originalPrice, discountPercent) {
 //     return (originalPrice - (originalPrice * discountPercent));
 // }
+
 // console.log(applyDiscount(100, .2).toFixed(2))
 
 // IIFE - Immediately Invoked Functions

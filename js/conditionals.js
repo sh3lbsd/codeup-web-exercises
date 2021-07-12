@@ -170,7 +170,7 @@ function createNegPosMessage(number) {
 //         }
 //     }
 // }
-// heloooo
+// hello
 // getUserNumAndInfo();
 
 })();
