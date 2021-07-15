@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>JS Review: Intro, Conditionals and Functions</title>
+</head>
+<body>
+
+<script>
+    "use strict";
+
+    // REVIEW
+
+
+    // Basics of the Terminal
+
+    /*
+
+    cd
+    ls
+    pwd
+    cat
+    mv
+
+    */
+
+    // Basics of Git and GitHub
+
+    /*
+
+    What is the difference between Git and GitHub???
+
+    Git is the version control system software
+    GitHub is the online host for our code (of many)
+
+    What is the staging area????
+
+    A step before the commit to see what will be included in the commit / save
+
+    git add - adds file(s) to the "staging area"
+    git status - a way to check what's in and not in the staging area
+    git commit -m 'SOME MESSAGE' - the "save" and the -m allows for an inline message
+    git checkout -b - creates a new branch and it moves you to the branch
+    git branch - list the branches that we currently have in a repo
+    git checkout - move be between branches and previous commits
+    git log - lists previous commits
+    git push - pushes the new commits to the upstream branch
+    git push origin BRANCH-NAME - pushes to the specific remote / branch
+    git remote - a way to list the remotes
+
+    */
+
+    // JavaScript Data Types, Operators, Variables, Expressions, Statements
+
+
+    /*
+
+    JS Data Types...
+
+    Boolean
+    Number
+    String
+    Null
+    undefined
+    Objects
+
+    Boolean Operators...
+
+    &&
+    ||
+    !
+
+    Truthy Falsey Values; what are they????
+
+    Falsey Values:
+
+    0
+    ''
+    null
+    undefined
+    NaN
+
+
+    */
+
+    /*
+
+    How to write web applications
+
+    How can we make the browser dynamic and to make decisions based
+    on actions that the user takes and other changes the data the web deals with
+
+    */
+
+
+    // Using JS in an HTML document
+
+    /*
+
+    Use inline JS or source it from separate file
+
+    External JS file is preferred
+    - separate JS files can scale across multiple HTML files
+    - separation of concerns
+    - helps with performance via caching
+
+    Can have multiple script tags
+
+    Console Logs to peek into code and debug
+
+    Strict Mode - shows you more errors in the code
+
+    Dialogue Functions
+    Prompt
+    Alert
+    Confirm
+
+    */
+
+    // Functions
+
+    // Like the paragraphs of code
+    // Return a value if defined explicitly or return undefined otherwise
+    // Group actions together
+    // Help to create DRY code (avoid repetition)
+    // function declaration and function expressions
+    // parameters / arguments - input in the definition / input when calling/invoking the function
+    // var x = functionName; - stores the literal definition of the function in x
+    // var x = functionName(); - stores the return value in x
+    // Higher Order Function -
+
+    // function returnHello() {
+    //     return 'hello';
+    // }
+    //
+    // function sayHello(callback) {
+    //     console.log(callback());
+    // }
+    //
+    // sayHello(returnHello);
+
+    // Pure Function
+
+    // a function that can when called with the same input will always have the same output and no side effects
+
+    // var x = 23;
+    //
+    // function isThisPure(input) {
+    //     console.log(input);
+    //     x++;
+    //     return input;
+    // }
+
+    // IIFE
+
+    // Conditionals
+
+    // if / else
+    // switch
+    // what the conditional evaluate (conditions and conditional expressions)
+    // ternary operator
+
+    // SWITCH
+
+    // var favProgrammingLanguage = prompt('Please enter your favorite programming language');
+
+
+    // if (favProgrammingLanguage === 'python') {
+    //     console.log('Cool data processing langauge!');
+    // } else if (favProgrammingLanguage === 'javascript') {
+    //
+    // }
+
+    // switch(favProgrammingLanguage) {
+    //     case 'python':
+    //         console.log('Cool data processing langauge!');
+    //         break;
+    //     case 'javascript':
+    //         console.log('Cool web language!');
+    //         break;
+    //     case 'cobal':
+    //         console.log('How old are you?')
+    //         break;
+    //     default:
+    // }
+
+
+
+    // if (favProgrammingLanguage.length > 5) {
+    //     console.log('That is a long language name');
+    // } else if (favProgrammingLanguage === 'python') {
+    //
+    // }
+
+
+
+
+
+    // TERNARY
+
+    //     function sayStrLengthMsg(str) {
+    //         // var output = '';
+    //         // if (str.length > 5) {
+    //         //     output = 'That is a long string!';
+    //         // } else {
+    //         //     output = 'That is a short string!';
+    //         // }
+    //         // return output;
+    //
+    //         return str.length > 5 ? 'That is a long string!' : 'That is a short string!';
+    //
+    //     }
+    //
+    // console.log(sayStrLengthMsg('cat'));
+    // console.log(sayStrLengthMsg('codeup'));
+
+
+    // PASSING VARIABLES TO FUNCTIONS vs. GLOBAL VARIABLES
+
+    // var x = 34;
+    //
+    // function increment(x) {
+    //     x++;
+    //     return x;
+    // }
+
+    // var name = 'Justin';
+    // function sayHello(name) {
+    //     return 'Hello, ' + name;
+    // }
+    // sayHello(name);
+
+
+
+    // IF / ELSE
+
+
+
+    // IIFE (SEE BELOW)
+
+
+    // Callback Functions
+
+
+    // function logInput(somethingElse) {
+    //     console.log(somethingElse());
+    // }
+    //
+    // function returnJustin() {
+    //     return "Justin";
+    // }
+    //
+    // logInput(function() {
+    //     return 'Bob';
+    // });
+    //
+    // logInput(returnJustin);
+    //
+    // console.log(x());
+    //
+    // var x = function() {
+    //     return 3;
+    // }
+    // function x() {
+    //     return 3;
+    // }
+
+    // function doThingsWithWeatherData(weatherData) {
+    //    
+    // }
+    //
+    // let weatherURLWeatherAPI = 'http://SOME_ADDRESS';
+    // fetch(weatherURLWeatherAPI).then(doThingsWithWeatherData)
+
+
+    // var y = function() {
+    //     return 4;
+    // }
+
+
+
+
+
+
+
+
+    </script>
+
+    <!-- Example of IIFE protecting code from polluting the Global Scope -->
+    <!--<script>-->
+    <!--    (function() {-->
+    <!--        let x = 3;-->
+    <!--        let y = 2;-->
+    <!--        console.log(x + y);-->
+    <!--    })();-->
+    <!--</script>-->
+    <!--<script>-->
+    <!--    (function() {-->
+    <!--        let x = 3;-->
+    <!--        let y = 2;-->
+    <!--        console.log(x + y);-->
+    <!--    })();-->
+    <!--</script>-->
+    </body>
+    </html>
