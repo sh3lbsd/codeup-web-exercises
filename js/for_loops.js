@@ -110,10 +110,10 @@
 //     7 x 9 = 63
 //     7 x 10 = 70
 
-function showMultiplicationTable(input) {
-    for (var i = 1; i <= 10; ++i)
-        console.log(i + " x " + input + " = " + (i * input));
-}
+// function showMultiplicationTable(input) {
+//     for (var i = 1; i <= 10; ++i)
+//         console.log(i + " x " + input + " = " + (i * input));
+// }
 // console.log(showMultiplicationTable(7));
 
 //     Use a for loop and the code from the previous lessons to generate 10 random numbers between 20 and 200 and output to the console whether each number is odd or even. For example:
@@ -124,14 +124,14 @@ function showMultiplicationTable(input) {
 //     24 is even
 //     199 is odd
 // ...
-        for (var i = 1; i <= 10; ++i) {
-        var num = Math.floor(Math.random() * 180) + 20
-            if (num % 2 === 0) {
-            console.log(num + " is even")
-        } else {
-                console.log(num + " is odd")
-            }
-        }
+//         for (var i = 1; i <= 10; ++i) {
+//         var num = Math.floor(Math.random() * 180) + 20
+//             if (num % 2 === 0) {
+//             console.log(num + " is even")
+//         } else {
+//                 console.log(num + " is odd")
+//             }
+//         }
 //     Create a for loop that uses console.log to create the output shown below.
 //
 //
@@ -144,8 +144,24 @@ function showMultiplicationTable(input) {
 //     7777777
 //     88888888
 //     999999999
-var number = 7;
-var count = 0;
+
+// for (i = 1; i < 10; i++) {
+//     var number = i;
+//     var i = 0;
+//     var outputString = "";
+//     while (i < number) {
+//         outputString = outputString + number.toString();
+//         console.log(outputString);
+//         i = i + 1;
+//     }
+// }
+// console.log(outputString);
+//
+//     var crazyOne = 1;
+//     for (i = 1; i < 10; i++) {
+//         console.log(i * crazyOne);
+//         crazyOne  = crazyOne.toString() + 1;
+//     }
 
 //     Create a for loop that uses console.log to create the output shown below.
 //
