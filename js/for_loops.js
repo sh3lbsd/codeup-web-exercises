@@ -124,8 +124,8 @@ function showMultiplicationTable(input) {
 //     24 is even
 //     199 is odd
 // ...
-        for (var count = 1; count <= 10; ++count) {
-        var num = Math.floor(Math.random() * 100) + 20
+        for (var i = 1; i <= 10; ++i) {
+        var num = Math.floor(Math.random() * 180) + 20
             if (num % 2 === 0) {
             console.log(num + " is even")
         } else {
@@ -144,6 +144,9 @@ function showMultiplicationTable(input) {
 //     7777777
 //     88888888
 //     999999999
+var number = 7;
+var count = 0;
+
 //     Create a for loop that uses console.log to create the output shown below.
 //
 //
