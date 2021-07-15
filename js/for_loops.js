@@ -60,7 +60,36 @@
 // }
 //^loop within a loop
 
-//    EXERCISES
+    // var priceOfItem;
+    //
+    // while (true) {
+    //     var userInput = prompt ("").................
+    // }
+
+
+    // var words = "";
+    // for (i=0; i<5; i++) {
+    //     var word = prompt("Let's make sentence! Enter a word!");
+    //     if(word === "curses") {
+    //         console.log("Ouch! This is a respectable program!");
+    //         continue;
+    //     }
+    //     words = words + " " + word;
+    //     console.log("Your sentence is " + words);
+    // }
+    //
+    // var words = "";
+    // for (i=0; i<5; i++) {
+    //     var word = prompt("Let's make sentence! Enter a word!");
+    //     if(word === "curses") {
+    //         console.log("Ouch! This is a respectable program!");
+    //         continue;
+    //     }
+    //     words = words + " " + word;
+    //     console.log("Your sentence is " + words);
+    // }
+
+    //    EXERCISES
 //     Create a file named for_loops.js inside the js directory and link it to your loops.html file.
 //
 //         Create a function named showMultiplicationTable that accepts a number and console.logs the multiplication table for that number (just multiply by the numbers 1 through 10)
@@ -79,8 +108,10 @@
 //     7 x 9 = 63
 //     7 x 10 = 70
 
-    function showMultiplicationTable() {
-
+    function showMultiplicationTable(i) {
+        for (i = 10; i >= 1; i ** i) {
+            console.log(i**);
+        }
     }
 
 //     Use a for loop and the code from the previous lessons to generate 10 random numbers between 20 and 200 and output to the console whether each number is odd or even. For example:
