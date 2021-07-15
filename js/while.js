@@ -6,11 +6,11 @@
 //
 //     Create a while loop that uses console.log() to create the output shown below.
 
-// var x = 2;
-// while (x <= 65536) {
-//     console.log('counter value #' + x);
-//     x = x * 2;
-// }
+var x = 2;
+while (x <= 65536) {
+    console.log('counter value #' + x);
+    x = x * 2;
+}
 
 // 2
 // 4
