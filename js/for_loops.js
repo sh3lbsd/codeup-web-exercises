@@ -10,7 +10,7 @@
 // "count" is the loop control variable (lcv)
 // the lcv gets initialized (var count =100;)
 // the value of the lcv is checked in the conditional test
-// the lcv is th eoutput (console.log(count);)
+// the lcv is the output (console.log(count);)
 // the value of the lcv is modified inside th eloop (count = count -1;) -- otherwise it is an infinite loop
 
     // (loop control variable is intialized; conditional tested; lcv modified)
