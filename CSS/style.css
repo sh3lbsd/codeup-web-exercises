@@ -1,7 +1,7 @@
-h1 {
-    color: olivedrab;
+.fancy-header {
+    color: purple;
     text-align: center;
-    font-size: 150px;
+    font-size: 20px;
 }
 
 h2
