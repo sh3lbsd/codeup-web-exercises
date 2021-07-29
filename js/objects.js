@@ -1,4 +1,5 @@
-// "use strict";
+// (function() {
+"use strict";
 // var currentWeather = {
 //     humidity: 77,
 //     temp: 82.33,
@@ -26,8 +27,22 @@
 
 // notes from class
 
+
 // (function() {
     "use strict";
+
+function log(...args) {
+    [...args].forEach(str => {
+        const div = document.createElement('div');
+        div.innerHTML = str
+        document.body.append(div)
+    })
+}
+// console.log = log
+//logs things on the page instead of the console^^
+
+
+
 //
 //     /**
 //      * TODO:
@@ -51,6 +66,17 @@ var person =
 person.sayHello = sayHello;
 person.sayHello(firstName, lastName);
 
+//
+// var person = {
+//     firstName: "Shelby",
+//     lastName: "Davis",
+// };
+//
+// log(person.firstName);
+// log(person.lastName);
+
+
+
     // console.log(person.firstName)
     // console.log(person.lastName)
 
@@ -68,6 +94,13 @@ person.sayHello(firstName, lastName);
 //      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
 //      */
 
+
+// person.sayHello = function() {
+//     return "Hello from " + person.firstName + " " + person.lastName;
+// };
+//
+// log(person.sayHello());
+
 //
 //     /** TODO:
 //      * HEB has an offer for the shoppers that buy products amounting to
@@ -82,13 +115,71 @@ person.sayHello(firstName, lastName);
 //      * represents one shopper. Use a foreach loop to iterate through the array,
 //      * and console.log the relevant messages for each person
 //      */
+
+    var discountThreshold = 200;
+    var discountPercentage = .12;
+    var shoppers = [
+        {name: 'Cameron', amount: 180},
+        {name: 'Ryan', amount: 250},
+        {name: 'George', amount: 320},
+    ];
+    // if purchasing more than $200, will get 12 %
+
+    // cameron is purchasing $180 of stuff. he will get $??(0) off the purchase and
+        // pay $180
+    // ryan is purchasing $250 of stuff. he will get $30 of the purchase and pay $220
+        // .12 * 250 = 30
+    // george is purchasing $320 of stuff. he will get $38.40 of the purchase and pay
+        // $281.60
+
+function calculateDiscount(amount, threshold, discountPercentage) {
+    //if the amount is greater than the threshold, apply the discount percentage
+    if (amount <= threshold) {
+        return 0;
+    } else {
+        return (amount * discountPercentage);
+    }
+}
+
+// log(calculateDiscount(180, discountThreshold, discountPercentage), 0); // 0
+// log(calculateDiscount(250, discountThreshold, discountPercentage), 30); // 30
+// log(calculateDiscount(320, discountThreshold, discountPercentage), 38.4); // 38.4
+    function numToCurrency(num) {
+        return '$' +num.toFixed(2);
+    }
+    shoppers.forEach(function(shopper) {
+    //What's the name of the array... "shoppers"
+        for (var i = 0; i <= shoppers.length; i +=1) {
+            var discountedAmount = calculateDiscount(shoppers[i].amount, discountThreshold,
+                discountPercentage);
+            var output = shoppers[i].name + ' is purchasing ' + shoppers[i].amount
+                + ' of stuff. He will get '
+                + discountedAmount + ' off the purchase and pay '
+                + (shoppers[i].amount - discountedAmount) + '.';
+            log(output);
+        }
+    });
+// var ryansDiscountedAmount = calculateDiscount(shoppers[1].amount, discountThreshold,
+//     discountPercentage);
+// var output2 = shoppers[1].name + ' is purchasing ' + shoppers[1].amount
+//     + ' of stuff. He will get '
+//     + cameronsDiscountedAmount + ' off the purchase and pay '
+//     + (shoppers[1].amount - cameronsDiscountedAmount) + '.';
 //
-//     // var shoppers = [
-//     //     {name: 'Cameron', amount: 180},
-//     //     {name: 'Ryan', amount: 250},
-//     //     {name: 'George', amount: 320}
-//     // ];
+// var georgesDiscountedAmount = calculateDiscount(shoppers[2].amount, discountThreshold,
+//     discountPercentage);
+// var output3 = shoppers[2].name + ' is purchasing ' + shoppers[2].amount
+//     + ' of stuff. He will get '
+//     + cameronsDiscountedAmount + ' off the purchase and pay '
+//     + (shoppers[2].amount - cameronsDiscountedAmount) + '.';
+
+// log(output1);
+// log(output2);
+// log(output3);
 //
+//
+// log(output1);
+
 //     /** TODO:
 //      * Create an array of objects that represent books and store it in a
 //      * variable named `books`. Each object should have a title and an author
@@ -102,6 +193,10 @@ person.sayHello(firstName, lastName);
 //      * > console.log(books[0].author.lastName) // "Adams"
 //      */
 //
+
+
+
+
 //     /**
 //      * TODO:
 //      * Loop through the books array and output the following information about
@@ -127,6 +222,10 @@ person.sayHello(firstName, lastName);
 //      *      ...
 //      */
 //
+
+
+
+
 //     /**
 //      * Bonus:
 //      * - Create a function named `createBook` that accepts a title and author
