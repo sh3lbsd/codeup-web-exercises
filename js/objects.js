@@ -26,7 +26,7 @@
 
 // notes from class
 
-(function() {
+// (function() {
     "use strict";
 //
 //     /**
@@ -39,7 +39,25 @@
 //      *  > console.log(person.firstName) // "Rick"
 //      *  > console.log(person.lastName) // "Sanchez"
 //      */
-//
+
+var person =
+    {
+        firstName: "Shelby",
+        lastName: "Davis",
+    };
+        sayHello(firstName, lastName){
+            console.log("Hello from ");
+        }
+person.sayHello = sayHello;
+person.sayHello(firstName, lastName);
+
+    // console.log(person.firstName)
+    // console.log(person.lastName)
+
+
+
+
+
 //     /**
 //      * TODO:
 //      * Add a sayHello method to the person object that returns a greeting using
@@ -49,6 +67,7 @@
 //      * Example
 //      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
 //      */
+
 //
 //     /** TODO:
 //      * HEB has an offer for the shoppers that buy products amounting to
