@@ -4,4 +4,15 @@
     font-size: 20px;
 }
 
-h2
+p {
+    font-size: 12px;
+}
+
+img {
+    width: 40%;
+    display: inline-block;
+}
+
+em {
+    margin: 20px 0;
+}
