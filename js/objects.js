@@ -1,5 +1,15 @@
+"use strict"
+const ul = document.createElement("ul")
+document.body.append(ul)
+
+function log(...args) {
+    ;[...args].forEach((str) => {
+        const li = document.createElement("li")
+        li.innerHTML = str
+        ul.append(li)
+    })
+}
 // (function() {
-"use strict";
 // var currentWeather = {
 //     humidity: 77,
 //     temp: 82.33,
@@ -27,21 +37,9 @@
 
 // notes from class
 
-
 // (function() {
-    "use strict";
-
-function log(...args) {
-    [...args].forEach(str => {
-        const div = document.createElement('div');
-        div.innerHTML = str
-        document.body.append(div)
-    })
-}
 // console.log = log
 //logs things on the page instead of the console^^
-
-
 
 //
 //     /**
@@ -58,7 +56,7 @@ function log(...args) {
 var person = {
     firstName: "Shelby",
     lastName: "Davis",
-};
+}
 
 //
 // var person = {
@@ -69,14 +67,8 @@ var person = {
 // log(person.firstName);
 // log(person.lastName);
 
-
-
-    // console.log(person.firstName)
-    // console.log(person.lastName)
-
-
-
-
+// console.log(person.firstName)
+// console.log(person.lastName)
 
 //     /**
 //      * TODO:
@@ -88,12 +80,11 @@ var person = {
 //      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
 //      */
 
+person.sayHello = function () {
+    return "Hello from " + person.firstName + " " + person.lastName
+}
 
-person.sayHello = function() {
-    return "Hello from " + person.firstName + " " + person.lastName;
-};
-
-log(person.sayHello());
+log(person.sayHello())
 
 //
 //     /** TODO:
@@ -110,49 +101,55 @@ log(person.sayHello());
 //      * and console.log the relevant messages for each person
 //      */
 
-    var discountThreshold = 200;
-    var discountPercentage = .12;
-    var shoppers = [
-        {name: 'Cameron', amount: 180},
-        {name: 'Ryan', amount: 250},
-        {name: 'George', amount: 320},
-    ];
-    // if purchasing more than $200, will get 12 %
+var discountThreshold = 200
+var discountPercentage = 0.12
+var shoppers = [
+    { name: "Cameron", amount: 180 },
+    { name: "Ryan", amount: 250 },
+    { name: "George", amount: 320 },
+]
+// if purchasing more than $200, will get 12 %
 
-    // cameron is purchasing $180 of stuff. he will get $??(0) off the purchase and
-        // pay $180
-    // ryan is purchasing $250 of stuff. he will get $30 of the purchase and pay $220
-        // .12 * 250 = 30
-    // george is purchasing $320 of stuff. he will get $38.40 of the purchase and pay
-        // $281.60
+// cameron is purchasing $180 of stuff. he will get $??(0) off the purchase and
+// pay $180
+// ryan is purchasing $250 of stuff. he will get $30 of the purchase and pay $220
+// .12 * 250 = 30
+// george is purchasing $320 of stuff. he will get $38.40 of the purchase and pay
+// $281.60
 
 function calculateDiscount(amount, threshold, discountPercentage) {
     //if the amount is greater than the threshold, apply the discount percentage
     if (amount <= threshold) {
-        return 0;
+        return 0
     } else {
-        return (amount * discountPercentage);
+        return amount * discountPercentage
     }
 }
 
 // log(calculateDiscount(180, discountThreshold, discountPercentage), 0); // 0
 // log(calculateDiscount(250, discountThreshold, discountPercentage), 30); // 30
 // log(calculateDiscount(320, discountThreshold, discountPercentage), 38.4); // 38.4
-    function numToCurrency(num) {
-        return '$' +num.toFixed(2);
-    }
-    shoppers.forEach(function(shopper) {
+function numToCurrency(num) {
+    return "$" + num.toFixed(2)
+}
+shoppers.forEach(function (shopper) {
     //What's the name of the array... "shoppers"
-        for (var i = 0; i <= shoppers.length; i +=1) {
-            var discountedAmount = calculateDiscount(shoppers[i].amount, discountThreshold,
-                discountPercentage);
-            var output = shoppers[i].name + ' is purchasing ' + shoppers[i].amount
-                + ' of stuff. He will get '
-                + discountedAmount + ' off the purchase and pay '
-                + (shoppers[i].amount - discountedAmount) + '.';
-            log(output);
-        }
-    });
+    var discountedAmount = calculateDiscount(
+        shopper.amount,
+        discountThreshold,
+        discountPercentage
+    )
+    var output =
+        shopper.name +
+        " is purchasing " +
+        shopper.amount +
+        " of stuff. He will get " +
+        discountedAmount +
+        " off the purchase and pay " +
+        (shopper.amount - discountedAmount) +
+        "."
+    log(output)
+})
 // var ryansDiscountedAmount = calculateDiscount(shoppers[1].amount, discountThreshold,
 //     discountPercentage);
 // var output2 = shoppers[1].name + ' is purchasing ' + shoppers[1].amount
@@ -189,10 +186,37 @@ function calculateDiscount(amount, threshold, discountPercentage) {
 //
 
 var books = [
-
+    {
+        title: "Corduroy",
+        author: {
+            firstName: "Don",
+            lastName: "Freeman",
+        },
+    },
+    {
+        title: "Clifford the Big Red Dog",
+        author: {
+            firstName: "Anne",
+            lastName: "Frank",
+        },
+    },
+    {
+        title: "Lord of The Rings",
+        author: { firstName: "F Scott.", lastName: "Fitzgerald" },
+    },
+    {
+        title: "The Great Big Gatsby",
+        author: { firstName: "J.R.R.", lastName: "Tolkein" },
+    },
+    {
+        title: "Hungry Hungry Caterpillar",
+        author: { firstName: "Booba", lastName: "Pamsea" },
+    },
 ]
 
-
+log(books[0].title) // "The Salmon of Doubt"
+log(books[0].author.firstName) // "Douglas"
+log(books[0].author.lastName) // "Adams"
 
 //     /**
 //      * TODO:
@@ -220,8 +244,12 @@ var books = [
 //      */
 //
 
-
-
+books.forEach(function(book, index) {
+    log(`Book # ${index + 1}`)
+    log(`Title: ${book.title}`)
+    log(`Author: ${book.author.firstName} ${book.author.lastName}`)
+    log('---')
+})
 
 //     /**
 //      * Bonus:
@@ -234,4 +262,3 @@ var books = [
 //      *   `showBookInfo` function.
 //      */
 //
-// })();
