@@ -1,15 +1,15 @@
-;(function () {
-    "use strict"
+(function () {
+    "use strict";
 
     // While Loops
     // Create a file named while.js in the js directory.
     //
     //     Create a while loop that uses console.log() to create the output shown below.
 
-    var x = 2
+    var x = 2;
     while (x <= 65536) {
-        console.log("counter value #" + x)
-        x = x * 2
+        console.log("counter value #" + x);
+        x = x * 2;
     }
 
     // 2
@@ -45,25 +45,25 @@
     //     NextIntroduction
 
     function sellAllCones() {
-        var allCones = Math.floor(Math.random() * 50) * 50
-        var conesSold
+        var allCones = Math.floor(Math.random() * 50) * 50;
+        var conesSold;
 
         do {
-            conesSold = Math.floor(Math.random() * 5) + 1
+            conesSold = Math.floor(Math.random() * 5) + 1;
             if (conesSold <= allCones) {
-                console.log(conesSold + " cones sold")
-                allCones -= conesSold
-                console.log("I have " + allCones + " left.")
+                console.log(conesSold + " cones sold");
+                allCones -= conesSold;
+                console.log("I have " + allCones + " left.");
             } else {
                 console.log(
                     "I cannot sell you " +
                         conesSold +
                         ", I only have " +
                         allCones
-                )
+                );
             }
-        } while (allCones > 0)
-        console.log("No more cones!")
+        } while (allCones > 0);
+        console.log("No more cones!");
     }
-    sellAllCones()
-})()
+    sellAllCones();
+})();
