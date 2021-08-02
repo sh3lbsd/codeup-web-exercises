@@ -55,16 +55,10 @@ function log(...args) {
 //      *  > console.log(person.lastName) // "Sanchez"
 //      */
 
-var person =
-    {
-        firstName: "Shelby",
-        lastName: "Davis",
-    };
-        sayHello(firstName, lastName){
-            console.log("Hello from ");
-        }
-person.sayHello = sayHello;
-person.sayHello(firstName, lastName);
+var person = {
+    firstName: "Shelby",
+    lastName: "Davis",
+};
 
 //
 // var person = {
@@ -95,11 +89,11 @@ person.sayHello(firstName, lastName);
 //      */
 
 
-// person.sayHello = function() {
-//     return "Hello from " + person.firstName + " " + person.lastName;
-// };
-//
-// log(person.sayHello());
+person.sayHello = function() {
+    return "Hello from " + person.firstName + " " + person.lastName;
+};
+
+log(person.sayHello());
 
 //
 //     /** TODO:
@@ -194,6 +188,9 @@ function calculateDiscount(amount, threshold, discountPercentage) {
 //      */
 //
 
+var books = [
+
+]
 
 
 
