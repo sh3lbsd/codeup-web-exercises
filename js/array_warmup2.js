@@ -6,39 +6,53 @@ information about the array, including the lengthOfArray,
 containsAllStrings, and the combineResult of adding all 
 elements together. */
 
+// function analyzeArray(arr) {
+//     // loop over the array
+//     var combine = arr[0];
+//     var isAllStrings = true;
+//     for (var i =0; i < arr.length; i++) {
+//         //for each element, combine into a value to update 
+//         //the object combineResult prop 
+//         if (i === 0) {
+//         } else {
+//             combine += arr[i];
+//         }
+//         //check if the element is a string or not
+//         if (typeof arr[i] !== 'string') {
+//             isAllStrings = false;
+//         }
+//     }
+
+//     console.log(combine);
+//     console.log(isAllStrings);
+
+//     // return the object containing the info for the array
+
+//     return {
+//         lengthOfArray: arr.length,
+//         containAllStrings: isAllStrings,
+//         combineResult: combine,
+//     };
+// }
+
+// console.log(analyzeArray([1, 2, 3 ])); // 6
+// console.log(analyzeArray(['a', 'b', 'c' ])); 
+// console.log(analyzeArray(['bob', 100, null ])); 
+
+//cleaned up version
 function analyzeArray(arr) {
-    // loop over the array
-    var combine = arr[0];
+    var combine = arr[0]; // assign starting value
     var isAllStrings = true;
-    for (var i =0; i < arr.length; i++) {
-        //for each element, combine into a value to update 
-        //the object combineResult prop 
-        if (i === 0) {
-        } else {
-            combine += arr[i];
-        }
-        //check if the element is a string or not
-        if (typeof arr[i] !== 'string') {
-            isAllStrings = false;
-        }
+    for (var i = 0; i < arr.length; i++) {
+        if (i !== 0) combine += arr[i]; // skip combining the first array element
+        if (typeof arr[i] !== 'string') isAllStrings = false; // switch to false if sad path
     }
-
-    console.log(combine);
-    console.log(isAllStrings);
-
-    // return the object containing the info for the array
-
     return {
         lengthOfArray: arr.length,
-        containAllStrings: isAllStrings,
-        combineResult: combine,
+        containsAllStrings: isAllStrings,
+        combineResult: combine
     };
 }
-
-console.log(analyzeArray([1, 2, 3 ])); // 6
-console.log(analyzeArray(['a', 'b', 'c' ])); 
-console.log(analyzeArray(['bob', 100, null ])); 
-
 
 /*
     EXAMPLE 1
