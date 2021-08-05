@@ -1090,7 +1090,7 @@ function sumAll(s) {
 
     // Exercise 62
     // Write a function definition named median that takes in a sequence of numbers and returns the average value
-
+    // GOOGLE THIS ONE
     function median(s) {
       var sorted = s.sort();
       // sorts the array so it's in order
