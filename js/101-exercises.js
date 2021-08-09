@@ -45,7 +45,9 @@ const handler = () => {
             console.error("[assert] expected:    " + JSON.stringify(expected));
             console.error("[assert] instead got: " + JSON.stringify(actual));
 
-            throw Error(`Assert failed in ${message}\nActual: ${actual}\n Expected: ${expected}`);
+            throw Error(
+                `Assert failed in ${message}\nActual: ${actual}\n Expected: ${expected}`
+            );
         }
     };
 
@@ -950,7 +952,7 @@ const handler = () => {
     addToDone("Exercise 53 is correct.");
 
     // Exercise 54
-    // Write a function definition named last that takes in sequence and returns the last value of that sequence.
+    // Write a function definition named last that takes in a sequence and returns the last value of that sequence.
 
     function last(s) {
         return s[s.length - 1];
@@ -992,7 +994,7 @@ const handler = () => {
     addToDone("Exercise 56 is correct.");
 
     // Exercise 57
-    // Write a function definition named firstAndSecond that takes in sequence and returns the first and second value of that sequence as an array
+    // Write a function definition named firstAndSecond that takes in a sequence and returns the first and second value of that sequence as an array
 
     function firstAndSecond(s) {
         var one = first(s);
@@ -1039,10 +1041,11 @@ const handler = () => {
     // Write a function definition named firstToLast that takes in a sequence and returns the sequence with the first value moved to the end of the sequence.
 
     function firstToLast(s) {
-      // shift returns and removes the first value from an array
+        // shift returns and removes the first value from an array
         var f = s.shift();
         // push adds value to the end of the array
         s.push(f);
+        // changing the order and then calling the array as is because the order has been changed
         return s;
     }
 
@@ -1052,6 +1055,7 @@ const handler = () => {
         ["is", "awesome", "JS"],
         "Exercise 59"
     );
+
     assert(
         firstToLast(["strawberry", "kiwi", "mango", "guava"]),
         ["kiwi", "mango", "guava", "strawberry"],
@@ -1059,16 +1063,21 @@ const handler = () => {
     );
     addToDone("Exercise 59 is correct.");
 
-    // Exercise 60
-    // Write a function definition named sumAll that takes in sequence of numbers and returns all the numbers added together.
+    // Exercise 60 (WE HAVE QUESTIONSZ)
+    // Write a function definition named sumAll that takes in A sequence of numbers and returns all the numbers added together.
 
-function sumAll(s) {
-  var sum = 0;
-  for (var i = 0; i < s.length; i++) {
-      sum += s[i];
-  }
-  return sum;
-}
+    function sumAll(array) {
+        var sum = 0;
+        // loop through array
+        for (var i = 0; i < array.length; i++) {
+            // get value in array at index i
+            var value = array[i];
+            // add value to sum
+            sum += value;
+            // or sum = sum + value
+        }
+        return sum;
+    }
 
     assert(sumAll([1, 2, 3, 4]), 10, "Exercise 60");
     assert(sumAll([3, 3, 3]), 9, "Exercise 60");
@@ -1077,10 +1086,10 @@ function sumAll(s) {
 
     //  Exercise 61
     //  Write a function definition named mean that takes in sequence of numbers and returns the average value
-    
+
     // Mean is the sum of the items divided by total number of items
     function mean(s) {
-      return sumAll(s) / s.length;
+        return sumAll(s) / s.length;
     }
 
     assert(mean([1, 2, 3, 4]), 2.5, "Exercise 61");
@@ -1092,22 +1101,22 @@ function sumAll(s) {
     // Write a function definition named median that takes in a sequence of numbers and returns the average value
     // GOOGLE THIS ONE
     function median(s) {
-      var sorted = s.sort();
-      // sorts the array so it's in order
-      var isEven = sorted.length % 2 === 0;
-      // detects if there's an even number in the array
-      // Math.ceil rounds up length / 2 to get the middle index of the array
-      var middleIndex = Math.ceil(sorted.length / 2); 
-      if(isEven) {
-        // Get's the values at the middle and 1 minus the middle and average them together
-        var lower = sorted[middleIndex - 1];
-        var upper = sorted[middleIndex];
-        var average = (lower + upper) / 2;
-        return average;
-      } else {
-        // Since index starts at zero, middle value is middleIndex - 1
-        return sorted[middleIndex - 1];
-      }
+        var sorted = s.sort();
+        // sorts the array so it's in order
+        var isEven = sorted.length % 2 === 0;
+        // detects if there's an even number in the array
+        // Math.ceil rounds up length / 2 to get the middle index of the array
+        var middleIndex = Math.ceil(sorted.length / 2);
+        if (isEven) {
+            // Get's the values at the middle and 1 minus the middle and average them together
+            var lower = sorted[middleIndex - 1];
+            var upper = sorted[middleIndex];
+            var average = (lower + upper) / 2;
+            return average;
+        } else {
+            // Since index starts at zero, middle value is middleIndex - 1
+            return sorted[middleIndex - 1];
+        }
     }
 
     assert(median([1, 2, 3, 4, 5]), 3.0, "Exercise 62");
@@ -1117,7 +1126,15 @@ function sumAll(s) {
     addToDone("Exercise 62 is correct.");
 
     // Exercise 63
-    // Write a function definition named maxMinusMin that takes in an array of numbers and returns the difference of the maximum minus theminimum.
+    // Write a function definition named maxMinusMin that takes in an array of numbers and returns the difference of the maximum minus the minimum.
+
+    function maxMinusMin(array) {
+        var max = Math.max(...array);
+        var min = Math.min(...array);
+        return max - min;
+    }
+    // Assuming the array is all integers,
+    // Math.min/Math.max works as long as you use the spread operator(...).
 
     assert(maxMinusMin([1, 2, 2, 8, 3, 4]), 7, "Exercise 63");
     assert(maxMinusMin([1, 1, 2, 3, 9]), 8, "Exercise 63");
@@ -1132,6 +1149,20 @@ function sumAll(s) {
     assert(productOfAll([2, 2, 3, 0]), 0, "Exercise 64");
     addToDone("Exercise 64 is correct.");
 
+    function productOfAll(array) {
+        var product = 1;
+        // we have to start at 1 because we are multiplying
+        // loop through array
+        for (var i = 0; i < array.length; i++) {
+            // get value in array at index i
+            var value = array[i];
+            // multiply value by product
+            product *= value;
+            // or product = product * value
+        }
+        return product;
+    }
+
     // Exercise 65
     // Write a function definition named getHighestNumber that takes in sequence of numbers and returns the largest number.
 
@@ -1139,6 +1170,10 @@ function sumAll(s) {
     assert(getHighestNumber([1, 5, 2, 3, 4]), 5, "Exercise 65");
     assert(getHighestNumber([5, 1, 2, 4, 9]), 9, "Exercise 65");
     addToDone("Exercise 65 is correct.");
+
+    function getHighestNumber(array) {
+        return Math.max(...array);
+    }
 
     // Exercise 66
     // Write a function definition named getSmallestNumber that takes in sequence of numbers and returns the smallest number.
@@ -1148,8 +1183,38 @@ function sumAll(s) {
     assert(getSmallestNumber([8, 9, 4, 5, 7]), 4, "Exercise 66");
     addToDone("Exercise 66 is correct.");
 
+    function getSmallestNumber(array) {
+        return Math.min(...array);
+    }
+
     // Exercise 67
     // Write a function definition named onlyOddNumbers that takes in sequence of numbers and returns the odd numbers in an array.
+
+    // Another way to do this:
+    // Use array.filter function to return a new array with only items you want in it
+    // return array.filter(function(item) {
+    //     var isOdd = value % 2 === 1;
+    //     // returning true means we keep it; otherwise it is removed from the array
+    //     if(isOdd) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // })
+    function onlyOddNumbers(array) {
+        // Start with empty array
+        var onlyOdds = [];
+        for (var i = 0; i < array.length; i++) {
+            var value = array[i];
+            // use Absolute value to account for negative numbers
+            var isOdd = Math.abs(value) % 2 === 1;
+            // Add to our array if the value is odd
+            if (isOdd) {
+                onlyOdds.push(value);
+            }
+        }
+        return onlyOdds;
+    }
 
     assert(onlyOddNumbers([1, 2, 3]), [1, 3], "Exercise 67");
     assert(
@@ -1163,6 +1228,21 @@ function sumAll(s) {
     // Exercise 68
     // Write a function definition named onlyEvenNumbers that takes in sequence of numbers and returns the even numbers in an array.
 
+    function onlyEvenNumbers(array) {
+        // Start with empty array
+        var onlyEven = [];
+        for (var i = 0; i < array.length; i++) {
+            var value = array[i];
+            // use Absolute value to account for negative numbers
+            var isEven = Math.abs(value) % 2 === 0;
+            // Add to our array if the value is even
+            if (isEven) {
+                onlyEven.push(value);
+            }
+        }
+        return onlyEven;
+    }
+
     assert(onlyEvenNumbers([1, 2, 3]), [2], "Exercise 68");
     assert(
         onlyEvenNumbers([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]),
@@ -1175,6 +1255,18 @@ function sumAll(s) {
     // Exercise 69
     // Write a function definition named onlyPositiveNumbers that takes in sequence of numbers and returns the positive numbers in an array.
 
+    function onlyPositiveNumbers(array) {
+        var onlyPos = [];
+        for (var i = 0; i < array.length; i++) {
+            var value = array[i];
+            var isPos = value > 0;
+            if (isPos) {
+                onlyPos.push(value);
+            }
+        }
+        return onlyPos;
+    }
+
     assert(onlyPositiveNumbers([1, 2, 3]), [1, 2, 3], "Exercise 69");
     assert(
         onlyPositiveNumbers([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]),
@@ -1186,6 +1278,19 @@ function sumAll(s) {
 
     // Exercise 70
     // Write a function definition named onlyNegativeNumbers that takes in sequence of numbers and returns the negative numbers in an array.
+    
+    
+    function onlyNegativeNumbers(array) {
+        var onlyNeg = [];
+        for (var i = 0; i < array.length; i++) {
+            var value = array[i];
+            var isNeg = value < 0;
+            if (isNeg) {
+                onlyNeg.push(value);
+            }
+        }
+        return onlyNeg;
+    }
 
     assert(onlyNegativeNumbers([1, 2, 3]), [], "Exercise 70");
     assert(
