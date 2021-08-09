@@ -1,3 +1,18 @@
+const ul = document.createElement("ul");
+document.body.append(ul);
+
+const consoleLog = console.log
+const log = (...args) => {
+    consoleLog(...args);
+    [...args].forEach((str) => {
+        const li = document.createElement("li");
+        li.innerHTML = str;
+        ul.append(li);
+    });
+}
+window.console.log = log
+
+
 /* AUG 4 WARMUPS
 ​
 TODO 1: Create a function, allAs, that takes in an array of letters and returns true
@@ -11,7 +26,7 @@ allAs(['c', 'a', 'b', 'A']) // false
 allAs(['a', 'A', 'a', 'a']) // true
 allAs([]) // false
 */
-​
+
 // my solution but I don't think I'm right lmao
 
 //function allAs(arr) {
@@ -86,7 +101,7 @@ all elements in the 'letters' array are 'A's or 'a's and all elements in the
 'numbers' array are 2s. Assume that the 'letters' array will only contain valid letters
 and the 'numbers' array will only contain valid numbers. If one or both arrays are empty,
 the function should return false. */
-​
+
 // function objectHasAllAsAnd2s(objArr) {
 // var objArr = 
 //     if (objArr.length === 0) {
@@ -121,6 +136,8 @@ the function should return false. */
 // numbers: [2]
 // })); // returns true;
 
+
+
 // # Third JavaScript Assessment Practice Problems
 // ​
 // The third JavaScript assessment will require the writing of functions that manipulate various data types, including arrays and objects. The use of iteration (loops) in many cases will be required to achieve this. The second halve of the JavaScript 101 exercises is excellent preparation for the assessment problems. This is a resource for additional practice problems.
@@ -131,14 +148,21 @@ the function should return false. */
 // 1. Create a function, `printAll`, that takes an array and logs every element on a new line in the console.
 // ​
 function printAll(arr) {
-    var a = 
+    // If array is null, looping through will throw an error
+    // returning here will exit the function
+    if(arr == null) return;
+    for (var i=0; i<arr.length; i++) {
+        // Get value at index i of array 
+        var value = arr[i]
+        // log value to console
+        console.log(value)
+    }
 }
 
-
 // 	```javascript
-// 	printAll(['hello', 'hi', 'greetings']); 
+	printAll(['hello', 'hi', 'greetings']); 
 // 	/*
-// 	  prints...
+// 	  prints...,kl
 // 	  hello
 // 	  hi
 // 	  greetings
@@ -146,19 +170,38 @@ function printAll(arr) {
 // 	```
 // ​
 // 1. Create a function, `getLowestNumber`, that take in an array of numbers and returns the lowest number.
-// ​
+function getLowestNumber(array) {
+    return Math.min(...array);
+}
+
 // 	```javascript
-// 	getLowestNumber([23,47,50,5]); // returns 5
-// 	getLowestNumber([5.8,7.3,8.2,4.7, 4.3]); returns 4.3
-// 	getLowestNumber([-7,9,76,0,-4]); // returns -7
+	console.log(getLowestNumber([23,47,50,5])); // returns 5
+	console.log(getLowestNumber([5.8,7.3,8.2,4.7, 4.3])); // returns 4.3
+	console.log(getLowestNumber([-7,9,76,0,-4])); // returns -7
 // 	```
 // ​
+
 // 1. Create a function, `getOccurrences`, that that takes in two arguments, a string and a letter. The function will count the number of occurrences of the specified letter within the string and return that number. The function should recognize case for instances (e.g. 'M' does not equal 'm').
+function getOccurrences(string, letterToCount) {
+    // A string is an array of letters
+    var counter = 0;
+    // loop through string and add 1 to the counter if the letter is equal to the one we are counting occurrences of
+    for(var index = 0; index < string.length; index++) {
+        // get letter in string at index
+        var currentLetter = string[index]
+        // if the current letter and the letter we are counting are equal, increment our counter
+        if(currentLetter === letterToCount) {
+            // the ++ operator is a shortcut for counter = counter + 1
+            counter++
+        }
+    }
+    return counter;
+}
 // ​
 // 	```javascript
-// 	getOccurrences('hello', 'l'); // returns 2
-// 	getOccurrences('mississippi', 's'); // returns 4
-// 	getOccurrences('Bubble', 'B'); // returns 1
+	console.log(getOccurrences('hello', 'l')); // returns 2
+	console.log(getOccurrences('mississippi', 's')); // returns 4
+	console.log(getOccurrences('Bubble', 'B')); // returns 1
 // 	```
 // ​
 // 1. Create a function, `getLongestString`, that takes in an array of strings and returns the longest string. If the two longest words are equal in length, return the last to appear in the array.
