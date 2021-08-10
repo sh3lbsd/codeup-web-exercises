@@ -1280,7 +1280,7 @@ const handler = () => {
     // Write a function definition named onlyNegativeNumbers that takes in sequence of numbers and returns the negative numbers in an array.
     
     
-    function onlyNumbers(array) {
+    function onlyNegativeNumbers(array) {
         var onlyNeg = [];
         for (var i = 0; i < array.length; i++) {
             var value = array[i];
