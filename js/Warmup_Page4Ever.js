@@ -1,3 +1,4 @@
+(function () {
 const ul = document.createElement("ul");
 document.body.append(ul);
 
@@ -147,20 +148,20 @@ the function should return false. */
 // ​
 // 1. Create a function, `printAll`, that takes an array and logs every element on a new line in the console.
 // ​
-function printAll(arr) {
-    // If array is null, looping through will throw an error
-    // returning here will exit the function
-    if(arr == null) return;
-    for (var i=0; i<arr.length; i++) {
-        // Get value at index i of array 
-        var value = arr[i]
-        // log value to console
-        console.log(value)
-    }
-}
-
-// 	```javascript
-	printAll(['hello', 'hi', 'greetings']); 
+// function printAll(arr) {
+//     // If array is null, looping through will throw an error
+//     // returning here will exit the function
+//     if(arr == null) return;
+//     for (var i=0; i<arr.length; i++) {
+//         // Get value at index i of array
+//         var value = arr[i]
+//         // log value to console
+//         console.log(value)
+//     }
+// }
+//
+// // 	```javascript
+// 	printAll(['hello', 'hi', 'greetings']);
 // 	/*
 // 	  prints...,kl
 // 	  hello
@@ -170,38 +171,38 @@ function printAll(arr) {
 // 	```
 // ​
 // 1. Create a function, `getLowestNumber`, that take in an array of numbers and returns the lowest number.
-function getLowestNumber(array) {
-    return Math.min(...array);
-}
-
-// 	```javascript
-	console.log(getLowestNumber([23,47,50,5])); // returns 5
-	console.log(getLowestNumber([5.8,7.3,8.2,4.7, 4.3])); // returns 4.3
-	console.log(getLowestNumber([-7,9,76,0,-4])); // returns -7
+// function getLowestNumber(array) {
+//     return Math.min(...array);
+// }
+//
+// // 	```javascript
+// 	console.log(getLowestNumber([23,47,50,5])); // returns 5
+// 	console.log(getLowestNumber([5.8,7.3,8.2,4.7, 4.3])); // returns 4.3
+// 	console.log(getLowestNumber([-7,9,76,0,-4])); // returns -7
 // 	```
 // ​
 
 // 1. Create a function, `getOccurrences`, that that takes in two arguments, a string and a letter. The function will count the number of occurrences of the specified letter within the string and return that number. The function should recognize case for instances (e.g. 'M' does not equal 'm').
-function getOccurrences(string, letterToCount) {
-    // A string is an array of letters
-    var counter = 0;
-    // loop through string and add 1 to the counter if the letter is equal to the one we are counting occurrences of
-    for(var index = 0; index < string.length; index++) {
-        // get letter in string at index
-        var currentLetter = string[index]
-        // if the current letter and the letter we are counting are equal, increment our counter
-        if(currentLetter === letterToCount) {
-            // the ++ operator is a shortcut for counter = counter + 1
-            counter++
-        }
-    }
-    return counter;
-}
+// function getOccurrences(string, letterToCount) {
+//     // A string is an array of letters
+//     var counter = 0;
+//     // loop through string and add 1 to the counter if the letter is equal to the one we are counting occurrences of
+//     for(var index = 0; index < string.length; index++) {
+//         // get letter in string at index
+//         var currentLetter = string[index]
+//         // if the current letter and the letter we are counting are equal, increment our counter
+//         if(currentLetter === letterToCount) {
+//             // the ++ operator is a shortcut for counter = counter + 1
+//             counter++
+//         }
+//     }
+//     return counter;
+// }
 // ​
 // 	```javascript
-	console.log(getOccurrences('hello', 'l')); // returns 2
-	console.log(getOccurrences('mississippi', 's')); // returns 4
-	console.log(getOccurrences('Bubble', 'B')); // returns 1
+// 	console.log(getOccurrences('hello', 'l')); // returns 2
+// 	console.log(getOccurrences('mississippi', 's')); // returns 4
+// 	console.log(getOccurrences('Bubble', 'B')); // returns 1
 // 	```
 // ​
 // 1. Create a function, `getLongestString`, that takes in an array of strings and returns the longest string. If the two longest words are equal in length, return the last to appear in the array.
@@ -278,11 +279,84 @@ function getOccurrences(string, letterToCount) {
 // 	  }
 // 	*/
 // 	```
-// ​
+//
 // 1. Create a function, `createUsersObject`, that takes in two arrays: the first array is an array of strings (usernames), the second is an array of numbers (user ages). The function should return an object with property names matching to the first array elements paired with property values matching the second  array elements. Assume both arrays are the same length.
-// ​
+//
 // 	```javascript
 // 	var usernames = ['cindy', 'fred', 'cathy'];
 // 	var ages = [34, 22, 45];
 // 	createUsersObject(usernames, ages) // returns {cindy: 34, fred: 22, cathy: 45}
 // 	```
+
+//     ===============AUG 11, 2021===============
+//     Create a function called processNumber
+//     Takes one parameter that should be numeric - should handle both a number and a numeric string
+//     Starting from the original number, double the value of every other digit
+//     Then add the values of the individual digits together
+//     If the doubled value now has two digits, add the digits individually
+//     Return the resulting number
+//     If passed the number 176248, it should return 27
+//     If passed the number 1762483, it should return 30
+
+function processNumber(numericString, number) {
+    // var number = 176248;
+    var numbersArray = number.toString().split("");
+    // console.log(numbersArray);
+    var total = 0;
+    numbersArray.forEach(function(number, index) {
+        if (index % 2 !== 0) {
+            if ((parseFloat(number) * 2) < 10) {
+                total += parseFloat(number) * 2;
+            } else {
+                var numberArray = number.string.toString().split("");
+                // console.log(numberArray);
+                var numberToAddToTotal = parseFloat(numberArray[0]) + parseFloat(numberArray[1]);
+                total += numberToAddToTotal;
+                }
+            } else {
+                total += parseFloat(number);
+            }
+        });
+        return total;
+    }
+// console.log(total);
+
+
+
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

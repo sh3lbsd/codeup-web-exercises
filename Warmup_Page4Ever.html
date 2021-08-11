@@ -2,10 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Warmup Page</title>
 </head>
 <body>
   <script src="js/Warmup_Page4Ever.js"></script>
+  <script>
+
+    // AUG 10, 2021 ================================ WARM UP =====================================
+  // Create a function, filterOutBobUsers, that takes in an array of user objects with firstName and lastName properties and returns an array of user objects without any Bob users. The case of the Bob names does not matter.
+
+  // filterOutBobUsers(users) [
+  //         {
+  //             firstName: 'Fred',
+  //             lastName: 'Smith'
+  //         },
+  //         {
+  //             firstName: 'Cathy',
+  //             lastName: 'Smith'
+  //         },
+  //         {
+  //             firstName: 'Dawn',
+  //             lastName: 'Smith'
+  //         }
+  //     ]
+    var users;
+    users = [
+      {
+        firstName: 'bob',
+        lastName: 'Smith'
+      },
+      {
+        firstName: 'BOB',
+        lastName: 'Smith'
+      },
+      {
+        firstName: 'Fred',
+        lastName: 'Smith'
+      },
+      {
+        firstName: 'Cathy',
+        lastName: 'Smith'
+      },
+      {
+        firstName: 'Dawn',
+        lastName: 'Smith'
+      }
+    ];
+
+  function filterOutBobUsers(users) {
+    // output array
+    var noBobs = [];
+    //  looping over the users and if the given user's first name is bob, don't add output array
+    for (var i = 0; i < users.length; i++) {
+      console.log(users[i].firstName);
+      //  check if the first name property DOESN'T contain bob the push to the array
+      if (users[i].firstName.toLowerCase() !== 'bob') {
+        noBobs.push(users[i]);
+      }
+    }
+    // return the output array
+    return noBobs;
+  }
+      console.log(filterOutBobUsers(users));
+
+  </script>
 </body>
 </html>
 

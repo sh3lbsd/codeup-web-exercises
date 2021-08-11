@@ -1142,7 +1142,8 @@ const handler = () => {
     addToDone("Exercise 63 is correct.");
 
     // Exercise 64
-    // Write a function definition named productOfAll that takes in sequence of numbers and returns the product of multiplying all the numbers together
+    // Write a function definition named productOfAll that takes in sequence of numbers and
+    // returns the product of multiplying all the numbers together
 
     assert(productOfAll([1, 2, 3]), 6, "Exercise 64");
     assert(productOfAll([3, 4, 5]), 60, "Exercise 64");
@@ -1280,7 +1281,7 @@ const handler = () => {
     // Write a function definition named onlyNegativeNumbers that takes in sequence of numbers and returns the negative numbers in an array.
     
     
-    function onlyNumbers(array) {
+    function onlyNegativeNumbers(array) {
         var onlyNeg = [];
         for (var i = 0; i < array.length; i++) {
             var value = array[i];
