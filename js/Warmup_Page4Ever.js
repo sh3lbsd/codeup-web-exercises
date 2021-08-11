@@ -2,7 +2,7 @@
 const ul = document.createElement("ul");
 document.body.append(ul);
 
-const consoleLog = console.log
+const consoleLog = console.log;
 const log = (...args) => {
     consoleLog(...args);
     [...args].forEach((str) => {
@@ -10,9 +10,10 @@ const log = (...args) => {
         li.innerHTML = str;
         ul.append(li);
     });
-}
-window.console.log = log
-
+};
+window.console.log = log;
+// this code right here^^^
+// logs your console stuff straight onto the page instead of your tiny console
 
 /* AUG 4 WARMUPS
 ​
@@ -49,7 +50,7 @@ allAs([]) // false
 
 // function allAs(inputArr) {
 //     if (inputArr.length === 0) {
-//         return false; 
+//         return false;
 //     }
 //     // look at each element in the arr and if a non-'a' is found, return false
 //     for (var i = 0; i < inputArr.length; i++) {
@@ -80,7 +81,7 @@ all2s([]) // false
 */
 // ​function all2s(arr) {
 //     if (arr.length === 0) {
-//         return false; 
+//         return false;
 //     }
 //     for (var i = 0; i < numbers.length; i++) {
 //         if (arr[i] !== 2) {
@@ -104,9 +105,9 @@ and the 'numbers' array will only contain valid numbers. If one or both arrays a
 the function should return false. */
 
 // function objectHasAllAsAnd2s(objArr) {
-// var objArr = 
+// var objArr =
 //     if (objArr.length === 0) {
-//         return false; 
+//         return false;
 //     }
 // }
 // ​
@@ -114,8 +115,6 @@ the function should return false. */
 // function objectHasAllAsAnd2s(obj) {
 //     return allAs(obj.letters) && all2s(obj.numbers);
 // }
-
-
 
 // console.log(objectHasAllAsAnd2s({
 // letters: ['a', 'A', 'a', 'A'],
@@ -136,8 +135,6 @@ the function should return false. */
 // letters: ['a'],
 // numbers: [2]
 // })); // returns true;
-
-
 
 // # Third JavaScript Assessment Practice Problems
 // ​
@@ -162,6 +159,20 @@ the function should return false. */
 //
 // // 	```javascript
 // 	printAll(['hello', 'hi', 'greetings']);
+function printAll(arr) {
+    // If array is null, looping through will throw an error
+    // returning here will exit the function
+    if (arr == null) return;
+    for (var i = 0; i < arr.length; i++) {
+        // Get value at index i of array
+        var value = arr[i];
+        // log value to console
+        console.log(value);
+    }
+}
+
+// 	```javascript
+printAll(["hello", "hi", "greetings"]);
 // 	/*
 // 	  prints...,kl
 // 	  hello
@@ -179,6 +190,14 @@ the function should return false. */
 // 	console.log(getLowestNumber([23,47,50,5])); // returns 5
 // 	console.log(getLowestNumber([5.8,7.3,8.2,4.7, 4.3])); // returns 4.3
 // 	console.log(getLowestNumber([-7,9,76,0,-4])); // returns -7
+function getLowestNumber(array) {
+    return Math.min(...array);
+}
+
+// 	```javascript
+console.log(getLowestNumber([23, 47, 50, 5])); // returns 5
+console.log(getLowestNumber([5.8, 7.3, 8.2, 4.7, 4.3])); // returns 4.3
+console.log(getLowestNumber([-7, 9, 76, 0, -4])); // returns -7
 // 	```
 // ​
 
@@ -203,20 +222,73 @@ the function should return false. */
 // 	console.log(getOccurrences('hello', 'l')); // returns 2
 // 	console.log(getOccurrences('mississippi', 's')); // returns 4
 // 	console.log(getOccurrences('Bubble', 'B')); // returns 1
+function getOccurrences(string, letterToCount) {
+    // A string is an array of letters
+    var counter = 0;
+    // loop through string and add 1 to the counter if the letter is equal to the one we are counting occurrences of
+    for (var index = 0; index < string.length; index++) {
+        // get letter in string at index
+        var currentLetter = string[index];
+        // if the current letter and the letter we are counting are equal, increment our counter
+        if (currentLetter === letterToCount) {
+            // the ++ operator is a shortcut for counter = counter + 1
+            counter++;
+        }
+    }
+    return counter;
+}
+// 	```javascript
+console.log(getOccurrences("hello", "l")); // returns 2
+console.log(getOccurrences("mississippi", "s")); // returns 4
+console.log(getOccurrences("Bubble", "B")); // returns 1
 // 	```
 // ​
 // 1. Create a function, `getLongestString`, that takes in an array of strings and returns the longest string. If the two longest words are equal in length, return the last to appear in the array.
 // ​
+function getLongestString(array) {
+    // start longest string at empty
+    var longestString = "";
+    for (var index = 0; index < array.length; index++) {
+        // Gets current value in array in this iteration
+        var currentString = array[index];
+        // update our longest string to be the current string
+        // ONLY If our current string is bigger than the longest string so far,
+        if (currentString.length >= longestString.length) {
+            //If the two longest words are equal in length, return the last to appear in the array. (USE THIS >= ........ NOT THIS > )
+            longestString = currentString;
+        }
+    }
+    return longestString;
+}
 // 	```javascript
-// 	getLongestString(['hello', 'hi', 'greetings']); // returns 'greetings'
-// 	getLongestString(['hello', 'world', '!' ]); // returns 'world'
+console.log(getLongestString(["hello", "hi", "greetings"])); // returns 'greetings'
+console.log(getLongestString(["hello", "world", "!"])); // returns 'world'
 // 	```
 // ​
 // 1. Create a function, `getFirstLetter`, that takes an array of strings and returns an array of the first letter of each string.
 // ​
+function getFirstLetter(array) {
+    // Because they want us to return an array, start with empty array
+    var result = [];
+    for (var index = 0; index < array.length; index++) {
+        var currentValue = array[index];
+        // Get the first letter of a string by accessing it at index: 0
+        var firstLetter = currentValue[0];
+        // Push the first letter of the current string to our result array
+        result.push(firstLetter);
+    }
+    return result;
+}
+// SUPER SHORTCUT
+    // map loops through each item in an array and will turn it into a new array 
+    // based on what you return in the passed parameter  
+    // return array.map(string => string[0])
+    // 
+
+
 // 	```javascript
-// 	getFirstLetter(['hello', 'hi', 'greetings']); // returns ['h','h','g']
-// 	getFirstLetter(['hello', 'world', '!' ]); // returns ['h','w','!']
+console.log(getFirstLetter(["hello", "hi", "greetings"])); // returns ['h','h','g']
+console.log(getFirstLetter(["hello", "world", "!"])); // returns ['h','w','!']
 // 	```
 // ​
 // 1. Create a function, `arrayEndsWith`, that takes two arguments, an array and a shorter array, and returns a boolean whether or not the larger array ends with the same elements as the passed second array elements. The function should return true if the second array elements are at the end of the first array. Assume that neither array will be empty, contain only string, number, or boolean elements and that the length of the second array will always be shorter than the first.
@@ -270,7 +342,7 @@ the function should return false. */
 // ​
 // 	```javascript
 // 	getStringDeets("apple"); // returns...
-// 	/* 
+// 	/*
 // 	  {
 // 	    firstChar: "a",
 // 	    lastChar: "e",
@@ -324,39 +396,3 @@ function processNumber(numericString, number) {
 
 
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
