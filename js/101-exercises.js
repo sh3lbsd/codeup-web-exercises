@@ -830,7 +830,7 @@ const handler = () => {
     }
 
     // Exercise 45
-    // Write a function definition named countVowels that takes in value and returns the count of the nubmer of vowels in a sequence.
+    // Write a function definition named countVowels that takes in value and returns the count of the number of vowels in a sequence.
 
     assert(countVowels("banana"), 3, "Exercise 45");
     assert(countVowels("ubuntu"), 3, "Exercise 45");

@@ -167,12 +167,12 @@ function printAll(arr) {
         // Get value at index i of array
         var value = arr[i];
         // log value to console
-        console.log(value);
+        // console.log(value);
     }
 }
 
 // 	```javascript
-printAll(["hello", "hi", "greetings"]);
+// consoleLog(printAll(["hello", "hi", "greetings"]));
 // 	/*
 // 	  prints...,kl
 // 	  hello
@@ -195,9 +195,9 @@ function getLowestNumber(array) {
 }
 
 // 	```javascript
-console.log(getLowestNumber([23, 47, 50, 5])); // returns 5
-console.log(getLowestNumber([5.8, 7.3, 8.2, 4.7, 4.3])); // returns 4.3
-console.log(getLowestNumber([-7, 9, 76, 0, -4])); // returns -7
+// console.log(getLowestNumber([23, 47, 50, 5])); // returns 5
+// console.log(getLowestNumber([5.8, 7.3, 8.2, 4.7, 4.3])); // returns 4.3
+// console.log(getLowestNumber([-7, 9, 76, 0, -4])); // returns -7
 // 	```
 // ​
 
@@ -238,14 +238,16 @@ function getOccurrences(string, letterToCount) {
     return counter;
 }
 // 	```javascript
-console.log(getOccurrences("hello", "l")); // returns 2
-console.log(getOccurrences("mississippi", "s")); // returns 4
-console.log(getOccurrences("Bubble", "B")); // returns 1
+// console.log(getOccurrences("hello", "l")); // returns 2
+// console.log(getOccurrences("mississippi", "s")); // returns 4
+// console.log(getOccurrences("Bubble", "B")); // returns 1
 // 	```
-// ​
+
+
 // 1. Create a function, `getLongestString`, that takes in an array of strings and returns the longest string. If the two longest words are equal in length, return the last to appear in the array.
-// ​
-function getLongestString(array) {
+
+
+    function getLongestString(array) {
     // start longest string at empty
     var longestString = "";
     for (var index = 0; index < array.length; index++) {
@@ -253,33 +255,35 @@ function getLongestString(array) {
         var currentString = array[index];
         // update our longest string to be the current string
         // ONLY If our current string is bigger than the longest string so far,
-        if (currentString.length >= longestString.length) {
+            if (currentString.length >= longestString.length) {
             //If the two longest words are equal in length, return the last to appear in the array. (USE THIS >= ........ NOT THIS > )
             longestString = currentString;
+            }
         }
-    }
     return longestString;
-}
+    }
+
 // 	```javascript
-console.log(getLongestString(["hello", "hi", "greetings"])); // returns 'greetings'
-console.log(getLongestString(["hello", "world", "!"])); // returns 'world'
+// console.log(getLongestString(["hello", "hi", "greetings"])); // returns 'greetings'
+// console.log(getLongestString(["hello", "world", "!"])); // returns 'world'
 // 	```
-// ​
+
 // 1. Create a function, `getFirstLetter`, that takes an array of strings and returns an array of the first letter of each string.
-// ​
-function getFirstLetter(array) {
+
+    function getFirstLetter(array) {
     // Because they want us to return an array, start with empty array
     var result = [];
-    for (var index = 0; index < array.length; index++) {
+        for (var index = 0; index < array.length; index++) {
         var currentValue = array[index];
         // Get the first letter of a string by accessing it at index: 0
         var firstLetter = currentValue[0];
         // Push the first letter of the current string to our result array
         result.push(firstLetter);
+        }
+        return result;
     }
-    return result;
-}
-// SUPER SHORTCUT
+
+    // SUPER SHORTCUT
     // map loops through each item in an array and will turn it into a new array 
     // based on what you return in the passed parameter  
     // return array.map(string => string[0])
@@ -287,59 +291,117 @@ function getFirstLetter(array) {
 
 
 // 	```javascript
-console.log(getFirstLetter(["hello", "hi", "greetings"])); // returns ['h','h','g']
-console.log(getFirstLetter(["hello", "world", "!"])); // returns ['h','w','!']
+// console.log(getFirstLetter(["hello", "hi", "greetings"])); // returns ['h','h','g']
+// console.log(getFirstLetter(["hello", "world", "!"])); // returns ['h','w','!']
 // 	```
-// ​
+
+
 // 1. Create a function, `arrayEndsWith`, that takes two arguments, an array and a shorter array, and returns a boolean whether or not the larger array ends with the same elements as the passed second array elements. The function should return true if the second array elements are at the end of the first array. Assume that neither array will be empty, contain only string, number, or boolean elements and that the length of the second array will always be shorter than the first.
-// ​
+
+    function arrayEndsWith(array1, array2) {
+    var end = array1.slice(array1.length - array2.length)
+        // the first array - the second length helps us find the end of the array that we're looking at
+        for (var index = 0; index < array2.length; index++) {
+            if (end[index] !== array2[index]) {
+                return false;
+            }
+        }
+        return true;
+        // if nothing returns false once we go through the loop, then return true
+    }
+
+
+
 // 	```javascript
-// 	arrayEndsWith(['hi', 'hello', 'world', true, 3, 5], [3, 5]); // returns true
-// 	arrayEndsWith(['hi', 'hello', 'world', true, 3, 5], [3, 9]); // returns false
-// 	arrayEndsWith(['hi', 'hmmm'], ['hmmm']); // returns true
-// 	arrayEndsWith([1, 2, 3], [2, 3]); // returns true
-// 	arrayEndsWith([1, 2, 3], [3, 2]); // returns false
+// 	console.log(arrayEndsWith(['hi', 'hello', 'world', true, 3, 5], [3, 5])); // returns true
+// 	console.log(arrayEndsWith(['hi', 'hello', 'world', true, 3, 5], [3, 9])); // returns false
+// 	console.log(arrayEndsWith(['hi', 'hmmm'], ['hmmm'])); // returns true
+// 	console.log(arrayEndsWith([1, 2, 3], [2, 3])); // returns true
+// 	console.log(arrayEndsWith([1, 2, 3], [3, 2])); // returns false
 // 	```
-// ​
+
+
 // 1. Create a function, `numsToObject`, that takes in three number inputs and returns them as property values `num1`, `num2`, and `num3` on an object.
-// ​
+
+function numsToObject(number1, number2, number3) {
+    return {
+        num1: number1,
+        num2: number2,
+        num3: number3
+    }
+}
+
 // 	```javascript
-// 	numsToObject(4, 5, 6); // returns {num1: 4, num2: 5, num3: 6}
-// 	numsToObject(1, 2, 3); // returns {num1: 1, num2: 2, num3: 3}
-// 	numsToObject(0, 199, 34); // returns {num1: 0, num2: 199, num3: 34}
+// 	console.log(numsToObject(4, 5, 6)); // returns {num1: 4, num2: 5, num3: 6}
+// 	console.log(numsToObject(1, 2, 3)); // returns {num1: 1, num2: 2, num3: 3}
+// 	console.log(numsToObject(0, 199, 34)); // returns {num1: 0, num2: 199, num3: 34}
 // 	```
-// ​
+
+
+
 // 1. Create a function, `removeNums`, that takes in an array of data types and returns an array of the same elements except for any number data types. Numeric strings do not count as a number but NaN does.
-// ​
+
+    function removeNums(dataTypeArr) {
+    var result = [];
+    // this is a for loop
+        // for (var index = 0; index <dataTypeArr.length; index++) {
+        //     if(typeof dataTypeArr[index] !== "number") {
+        //         result.push(dataTypeArr[index]);
+        //     }
+        // }
+
+        // for each: for each item in the array do this function
+        // there's no need for an index in a for each loop
+        dataTypeArr.forEach(function(element) {
+            if(typeof element !== "number") {
+                result.push(element);
+            }
+        });
+
+        return result;
+}
+
+
 // 	```javascript
-// 	removeNums(['a', true, null, [], {}, 4, '5', NaN]) // returns ['a', true, null, [], {}, '5']
-// 	removeNums(['a', 'b', 'c']) // returns ['a', true, null, [], {}, '5']
+console.log(removeNums(['a', true, null, [], {}, 4, '5', NaN])); // returns ['a', true, null, [], {}, 4, '5', NaN]
+console.log(removeNums(['a', 'b', 'c'])); // returns ['a', 'b', 'c']
 // 	```
-// ​
+
+
+
 // 1. Create a function, `objectToSum`, that takes in an object, and returns the sum of any number property values (numeric strings will not be added). Expect that no object property values will be NaN. If no number properties are present, return 0.
-// ​
+
 // 	```javascript
 // 	objectToSum({prop1: 'bob', prop2: true, prop3: 5}) // returns 5
 // 	objectToSum({a: '3', b: true, c: 5, d: 3}) // returns 8
 // 	objectToSum({foo: 'one', bar: 'two'}) // returns 0
 // 	```
-// ​
+
+    function objectToSum(obj) {
+        var objArr = Object.values(obj);
+        var newArr = 0;
+        objArr
+    }
+
+
 // 1. Create a function, `objToObj`, that takes in an object with only property values of a string type and returns another object with a single property called 'all' with a value of all input object properties values concatenated together.
-// ​
+
 // 	***Please note that the order of object properties is uncertain and concatenating the object property values will be unpredictable. This is fine.***
-// ​
+
 // 	```javascript
 // 	objToObj({foo: 'hello', bar:'world'}) // returns {all: 'helloworld'} or {all: 'worldhello'}
 // 	objToObj({a: 'codeup', b:'rocks'}) // returns {all: 'rockscodeup'} or {all: 'codeuprocks'}
 // 	```
-// ​
+
+
+
 // 1. Create a function, `getStringDeets`, that takes in a string and returns an object with specific properties containing information about the string, namely:
-// ​
+
 //   - `firstChar` -  containing the first character of the string
 //   - `lastChar` - containing the last character of the string
 //   - `length`- containing the length of characters of the string
 //   - `shoutedVersion` - containing an all caps version of the string
-// ​
+
 // 	```javascript
 // 	getStringDeets("apple"); // returns...
 // 	/*
@@ -352,6 +414,8 @@ console.log(getFirstLetter(["hello", "world", "!"])); // returns ['h','w','!']
 // 	*/
 // 	```
 //
+
+
 // 1. Create a function, `createUsersObject`, that takes in two arrays: the first array is an array of strings (usernames), the second is an array of numbers (user ages). The function should return an object with property names matching to the first array elements paired with property values matching the second  array elements. Assume both arrays are the same length.
 //
 // 	```javascript
@@ -359,6 +423,11 @@ console.log(getFirstLetter(["hello", "world", "!"])); // returns ['h','w','!']
 // 	var ages = [34, 22, 45];
 // 	createUsersObject(usernames, ages) // returns {cindy: 34, fred: 22, cathy: 45}
 // 	```
+
+
+
+
+
 
 //     ===============AUG 11, 2021===============
 //     Create a function called processNumber
@@ -370,28 +439,28 @@ console.log(getFirstLetter(["hello", "world", "!"])); // returns ['h','w','!']
 //     If passed the number 176248, it should return 27
 //     If passed the number 1762483, it should return 30
 
-function processNumber(numericString, number) {
-    // var number = 176248;
-    var numbersArray = number.toString().split("");
-    // console.log(numbersArray);
-    var total = 0;
-    numbersArray.forEach(function(number, index) {
-        if (index % 2 !== 0) {
-            if ((parseFloat(number) * 2) < 10) {
-                total += parseFloat(number) * 2;
-            } else {
-                var numberArray = number.string.toString().split("");
-                // console.log(numberArray);
-                var numberToAddToTotal = parseFloat(numberArray[0]) + parseFloat(numberArray[1]);
-                total += numberToAddToTotal;
-                }
-            } else {
-                total += parseFloat(number);
-            }
-        });
-        return total;
-    }
-// console.log(total);
+// function processNumber(numericString, number) {
+//     // var number = 176248;
+//     var numbersArray = number.toString().split("");
+//     // console.log(numbersArray);
+//     var total = 0;
+//     numbersArray.forEach(function(number, index) {
+//         if (index % 2 !== 0) {
+//             if ((parseFloat(number) * 2) < 10) {
+//                 total += parseFloat(number) * 2;
+//             } else {
+//                 var numberArray = number.string.toString().split("");
+//                 // console.log(numberArray);
+//                 var numberToAddToTotal = parseFloat(numberArray[0]) + parseFloat(numberArray[1]);
+//                 total += numberToAddToTotal;
+//                 }
+//             } else {
+//                 total += parseFloat(number);
+//             }
+//         });
+//         return total;
+//     }
+// // console.log(total);
 
 
 
