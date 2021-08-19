@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Intro to Ajax</title>
+    <style>
+        #murals-info {
+            margin: 10px auto;
+            border: 5px ridge blueviolet;
+            padding: 15px;
+            width: 25%;
+            text-align:center;
+        }
+        #murals-info:hover {
+            cursor: pointer;
+            background-color: aliceblue;
+        }
+        #card-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            border: 2px solid darkgrey;
+            padding: 5px;
+            width: 330px;
+        }
+    </style>
+</head>
+<body>
+<section id="murals-info">
+    <p>I want to know about murals</p>
+</section>
+<section id="card-section"></section>
+<script src="js/jquery-3.6.0.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#murals-info").click(function() {
+            $.ajax("data/murals.json").done(function(data) {
+                data.forEach(function(mural) {
+                    console.log(mural.artwork_title ?? "Untitled");
+                    // the nullish coalescing operator
+                    // is this null or undefined? if so do this.. otherwise.. do that
+                    console.log(mural.artwork_credit);
+
+                    var title = (mural.artwork_title ?? "Untitled");
+                    $("#card-section").append('<article class ="card">' + '<p>' + title + '</p>' + '</article>');
+                });
+            });
+        });
+    });
+
+</script>
+</body>
+</html>
