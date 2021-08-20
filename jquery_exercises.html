@@ -36,21 +36,38 @@
 </div>
 </script>
 <script>
-    alert($("#first-heading").html());
-    alert($("#second-heading").html());
-    $(".codeup").css("border", "1px solid red");
+    // alert($("#first-heading").html());
+    // alert($("#second-heading").html());
+    // $(".codeup").css("border", "1px solid red");
+    //
+    // $("li").css("font-size", "20px");
+    //
+    // $("h1").css("background-color", "#47f8b3");
+    // $("p").css("background-color", "#0ad9f6");
+    // $("li").css("background-color", "#dc48bf");
+    //
+    // $("h1").each(function () {
+    //     alert($(this).html());
+    // });
+    //
+    // $("h1, p, li").css({"background-color": "#d68adc", "border": "solid 1px black", "color": "white"});
 
-    $("li").css("font-size", "20px");
-
-    $("h1").css("background-color", "#47f8b3");
-    $("p").css("background-color", "#0ad9f6");
-    $("li").css("background-color", "#dc48bf");
-
-    $("h1").each(function () {
-        alert($(this).html());
+    $('h1').click(function() {
+            $(this).css('background', '#c307f6');
     });
 
-    $("h1, p, li").css({"background-color": "#d68adc", "border": "solid 1px black", "color": "white"});
+    $('p').dblclick(function(e) {
+        $(this).css('font-size', '18px');
+    });
+
+    $('li').hover(
+        function() {
+            $(this).css('color', '#e5053a');
+        },
+        function() {
+            $(this).css('color', '#010002');
+        }
+    );
 </script>
 </body>
 </html>
