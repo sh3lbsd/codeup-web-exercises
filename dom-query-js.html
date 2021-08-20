@@ -31,7 +31,7 @@
 </p>
 
 <script>
-    function() {
+    (function() {
         "use strict";
         // // TODO: Uncomment next line and get the main header element by id
         // var mainHeader = document.getElementById('main-header');
@@ -70,7 +70,8 @@
 
         var mainHeader = document.getElementById('main-header');
         var btn1 = document.getElementById('btn1');
-        btn1.addEventListener('click', function () {
+        btn1.addEventListener('click', function() {
+            console.log("why not")
             document.getElementById('main-header').innerHTML = 'JavaScript is cool!'
         });
 
@@ -95,19 +96,11 @@
         });
 
         // add event listener to btn4
-
         var btn4 = document.getElementById('btn4');
         btn4.addEventListener('click', function() {
             var subPara = document.getElementsByClassName("sub-paragraph");
             subPara[0].innerHTML = 'Mission Accomplished!';
         });
-
-
-
-
-
-
-
     })();
 </script>
 </body>

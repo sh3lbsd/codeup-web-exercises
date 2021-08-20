@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mapbox</title>
+    <title>Third Exercise Map</title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map {
+            width: 800px;
+            height: 800px;
+        }
+    </style>
 </head>
 <body>
+<h1>Marker Coordinates:<span id="coordinates"></span></h1>
+<div id="map"></div>
 
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+<script src="js/keys.js"></script>
+<script src="js/mapbox-geocode-utils.js"></script>
+
+<script>
+    "use strict";
+
+var restaurants = [
+    {
+        name: 'Sushi Express',
+        address: '',
+        message:
+    }
+    {
+        name: 'Aldacos',
+        address: '',
+        message:
+    }
+    {
+        name: 'Willies',
+        address: '',
+        message:
+    }
+];
+
+function placeAllMarkers(restaurants, map) {
+    restaurants
+}
+</script>
 </body>
 </html>
