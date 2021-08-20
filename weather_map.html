@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Map</title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map {
+            width: 800px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/keys.js"></script>
+<script src="js/jquery-3.6.0.js"></script>
+<script src="js/mapbox-geocode-utils.js"></script>
+<script>
+    mapboxgl.accessToken = MAPBOX_API_TOKEN;
+    var map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [-98.4916, 29.4252], // starting position [lng, lat]
+        zoom: 10 // starting zoom
+    });
+
+    $.ajax('https://api.openweathermap.org/data/2.5/onecall', {
+        method: 'GET',
+        data: {
+            APPID: OPEN_WEATHER_ID,
+            lat: 29.4252,
+            lon: -98.4916,
+            units: 'imperial'
+        }
+    }).done(function(data) {
+        console.log(data);
+        console.log(data.current.clouds);
+
+        data.daily.forEach(function(day) {
+            console.log(day.humidity);
+        });
+
+    }).fail(function(error) {
+        console.log(error);
+    });
+    // sebastian's code that might be useful for something later
+    // console.log(new Date((data.current.dt * 1000)));
+    //
+    //kristen's code
+    // object.daily[0].forEach(function(weather){
+    //     console.log(daily[0].weather);
+    // });
+    // var weeklyForecast = object.daily[0].forEach(function(weather){
+    // console.log(weeklyForecast);
+    // });
+    //
+    //albert's code
+    // function getTime(){
+    //     var d = new Date( );
+    //     d.setHours( d.getHours() + 2 ); // offset from local time
+    //     var h = (d.getHours() % 12) || 12; // show midnight & noon as 12
+    //     return (
+    //         ( h < 10 ? '0' : '') + h +
+    //         ( d.getMinutes() < 10 ? ':0' : ':') + d.getMinutes() +
+    //         // optional seconds display
+    //         // ( d.getSeconds() < 10 ? ':0' : ':') + d.getSeconds() +
+    //         ( d.getHours() < 12 ? ' AM' : ' PM' )
+    //     );
+    // }
+    // var weeklyForcast = object.daily[0].forEach(function(weather){
+    // console.log(weeklyForecast);
+    // });
+
+
+</script>
+</body>
+</html>
