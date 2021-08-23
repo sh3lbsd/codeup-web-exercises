@@ -4,77 +4,284 @@
     <meta charset="UTF-8">
     <title>Weather Map</title>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     <style>
-        #map {
-            width: 800px;
-            height: 800px;
+        body {
+            background-color: #f7f7f7;
+        }
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            /* grid has two columns. 1fr means the first column will try to take up as much space as it can.
+            min-content means that the second column will only take up as much space as it needs */
+            /* 1fr = for one part of the available space */
+            grid-template-columns: 1fr min-content;
+            /* 1fr = for one part of the available space */
+            grid-template-rows: 100vh;
+            overflow: auto;
+        }
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            color: #2632c3;
+            background: #bbdfffa3;
+            backdrop-filter: blur(10px);
+            font-weight: bold;
+        }
+        #results, #display {
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            overflow: auto;
+        }
+
+        #results {
+            color: #003880;
+            margin: 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            text-Align: center;
+            font-Weight: bolder;
+            text-Shadow: rgb(153 167 175) -2px -1px 10px;
+        }
+
+        .clickable {
+            cursor: pointer;
+        }
+        #map{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+        }
+        #map-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .card {
+            background: #CF61CA;
+            padding: 8px;
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            white-space: nowrap;
+            flex-basis: auto;
+        }
+
+        #display {
+        align-self: flex-end;
+        }
+
+        .description {
+            display: flex;
+            justify-content: space-between;
+            white-space: nowrap;
+            gap: 8px;
+            color: #6361CF;
+            background: #bbdfffa3;
+        }
+        label {
+            font-weight: bold;
+        }
+        .temp {
+            display: flex;
+            justify-content: space-between;
+            white-space: nowrap;
+            gap: 8px;
+            color: #6361CF;
+            background: #6198CF;
+        }
+
+        .nav-wrapper {
+            background-color: #E8D2F1;
         }
     </style>
 </head>
 <body>
-<div id="map"></div>
+<!-- nav/search bar from materialize
+<nav>
+    <div class="nav-wrapper">
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+    </div>
+</nav> -->
+
+
+    <div id="container">
+        <div id="map-container">
+            <div id="map"></div>
+            <input id="search"/>
+            <h4 id="results" ></h4>
+        </div>
+        <div id="display"></div>
+    </div>
+
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/keys.js"></script>
 <script src="js/jquery-3.6.0.js"></script>
 <script src="js/mapbox-geocode-utils.js"></script>
+
 <script>
     mapboxgl.accessToken = MAPBOX_API_TOKEN;
     var map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-98.4916, 29.4252], // starting position [lng, lat]
+        center: [-97.741150,30.238148], // starting position [lng, lat]
         zoom: 10 // starting zoom
     });
 
-    $.ajax('https://api.openweathermap.org/data/2.5/onecall', {
-        method: 'GET',
-        data: {
-            APPID: OPEN_WEATHER_ID,
-            lat: 29.4252,
-            lon: -98.4916,
-            units: 'imperial'
-        }
-    }).done(function(data) {
-        console.log(data);
-        console.log(data.current.clouds);
+    var display = $('#display')
+    var mapContainer = $('#map')
+    var results = $('#results')
+    var searchInput = $("#search")
 
-        data.daily.forEach(function(day) {
-            console.log(day.humidity);
+    //function to get the search bar to display input results
+    searchInput.change(function(event) {
+        var value = event.target.value
+        geocode(value, MAPBOX_API_TOKEN).then(function(result) {
+            marker.setLngLat(result);
+            map.flyTo({center: result});
+            getWeatherForLocation({
+                lat: result[0], 
+                lon: result[1]
+            })
         });
+    })
 
-    }).fail(function(error) {
-        console.log(error);
+    // map marker
+    var marker = new mapboxgl.Marker({
+        color: '#4bc936',
+        draggable: true
+    })
+    .setLngLat([-97.741150,30.238148])
+    .addTo(map);
+
+    function getWeatherForLocation({lat, lon}) {
+        display.html('');
+        // sets the html to an empty string to clear anything that was previously there
+        return $.ajax('https://api.openweathermap.org/data/2.5/onecall', {
+            method: 'GET',
+            data: {
+                APPID: OPEN_WEATHER_ID,
+                lat: lat,
+                lon: lon,
+                units: 'imperial'
+            }
+        }).done(function(data) {
+            console.log(data);
+            console.log(data.current.clouds);
+            data.daily.forEach(function(day) {
+            //    {
+            //     "dt": 1629655200,
+            //     "sunrise": 1629633748,
+            //     "sunset": 1629680728,
+            //     "moonrise": 1629682860,
+            //     "moonset": 1629633660,
+            //     "moon_phase": 0.5,
+            //     "temp": {
+            //         "day": 94.77,
+            //         "min": 76.53,
+            //         "max": 96.55,
+            //         "night": 83.26,
+            //         "eve": 95.27,
+            //         "morn": 76.53
+            //     },
+            //     "feels_like": {
+            //         "day": 100.8,
+            //         "night": 84.79,
+            //         "eve": 96.48,
+            //         "morn": 78.12
+            //     },
+            //     "pressure": 1014,
+            //     "humidity": 44,
+            //     "dew_point": 69.46,
+            //     "wind_speed": 11.41,
+            //     "wind_deg": 173,
+            //     "wind_gust": 22.68,
+            //     "weather": [
+            //         {
+            //             "id": 801,
+            //             "main": "Clouds",
+            //             "description": "few clouds",
+            //             "icon": "02d"
+            //         }
+            //     ],
+            //     "clouds": 17,
+            //     "pop": 0,
+            //     "uvi": 10.05
+            // }
+        // Container for properties of the day object. 
+        // div element with css
+
+                var weather = day.weather[0];
+                var date = new Date(day.dt * 1000).toLocaleDateString();
+                //gets a new date for evryday on the cards
+                var card = $('<div class="card" />');
+                card.append(
+                    // append divs to card for properties in day object
+                    $('<div/>').append(date),
+    
+                    $('<div class="description" />').append(
+                        $('<label/>').append('Description:'),
+                        $('<div/>').append(weather.description),
+                    ),
+                    $('<div class="temp" />').append(day.temp.day),
+                    $(`<img width="50px" height="50px" src="http://openweathermap.org/img/w/${weather.icon}.png"/>`),
+                    //string with js variables inside ${}
+                    $('<div/>').append(day.humidity),
+                    $('<div/>').append(day.wind_speed),
+                    $('<div/>').append(day.pressure),
+                )
+                display.append(card);
+            });
+    
+        }).fail(function(error) {
+            console.log(error);
+        });
+    }
+
+    // Get weather initially for Austin TX 
+    // Call inside JQuery ready function so that the dom is loaded when we make the call
+    $(document).ready(function() {
+        getWeatherForLocation({
+            lat: 30.238148, 
+            lon: -97.741150,
+        })
+    })
+
+    marker.on('dragend', function onDragEnd() {
+        const coordinates = marker.getLngLat();
+        getWeatherForLocation({
+            lat: coordinates.lat, 
+            lon: coordinates.lng,
+        })
     });
-    // sebastian's code that might be useful for something later
-    // console.log(new Date((data.current.dt * 1000)));
-    //
-    //kristen's code
-    // object.daily[0].forEach(function(weather){
-    //     console.log(daily[0].weather);
-    // });
-    // var weeklyForecast = object.daily[0].forEach(function(weather){
-    // console.log(weeklyForecast);
-    // });
-    //
-    //albert's code
-    // function getTime(){
-    //     var d = new Date( );
-    //     d.setHours( d.getHours() + 2 ); // offset from local time
-    //     var h = (d.getHours() % 12) || 12; // show midnight & noon as 12
-    //     return (
-    //         ( h < 10 ? '0' : '') + h +
-    //         ( d.getMinutes() < 10 ? ':0' : ':') + d.getMinutes() +
-    //         // optional seconds display
-    //         // ( d.getSeconds() < 10 ? ':0' : ':') + d.getSeconds() +
-    //         ( d.getHours() < 12 ? ' AM' : ' PM' )
-    //     );
-    // }
-    // var weeklyForcast = object.daily[0].forEach(function(weather){
-    // console.log(weeklyForecast);
-    // });
+    // whenever the drag ends we get the coor. of the marker and then we call getWeather for the lng/lat
 
+    results.html('Results for: ' + searchInput)
 
 </script>
+<!--materialize JavaScript at end of body for optimized loading-->
+<!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
 </body>
 </html>
