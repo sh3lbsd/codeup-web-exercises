@@ -1,0 +1,100 @@
+body {
+    background-color: #f7f7f7;
+}
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    /* grid has two columns. 1fr means the first column will try to take up as much space as it can.
+    min-content means that the second column will only take up as much space as it needs */
+    /* 1fr = for one part of the available space */
+    grid-template-columns: 1fr min-content;
+    /* 1fr = for one part of the available space */
+    grid-template-rows: 100vh;
+    overflow: auto;
+}
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    color: #2632c3;
+    background: #bbdfffa3;
+    backdrop-filter: blur(10px);
+    font-weight: bold;
+}
+#results, #display {
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    overflow: auto;
+}
+
+#results {
+    color: #003880;
+    margin: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    text-Align: center;
+    font-Weight: bolder;
+    text-Shadow: rgb(153 167 175) -2px -1px 10px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+#map{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+#map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.card {
+    background: #CF61CA;
+    padding: 8px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    white-space: nowrap;
+    flex-basis: auto;
+}
+
+#display {
+align-self: flex-end;
+}
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    gap: 8px;
+    color: #6361CF;
+    background: #bbdfffa3;
+}
+label {
+    font-weight: bold;
+}
+.temp {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    gap: 8px;
+    color: #6361CF;
+    background: #6198CF;
+}
+
+.nav-wrapper {
+    background-color: #E8D2F1;
+}
