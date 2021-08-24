@@ -5,132 +5,23 @@
     <title>Weather Map</title>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-    Let browser know website is optimized for mobile-->
+    <link rel="stylesheet" href="css/weather.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- Let browser know website is optimized for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-    <style>
-        body {
-            background-color: #f7f7f7;
-        }
-        #container {
-            width: 100vw;
-            height: 100vh;
-            display: grid;
-            /* grid has two columns. 1fr means the first column will try to take up as much space as it can.
-            min-content means that the second column will only take up as much space as it needs */
-            /* 1fr = for one part of the available space */
-            grid-template-columns: 1fr min-content;
-            /* 1fr = for one part of the available space */
-            grid-template-rows: 100vh;
-            overflow: auto;
-        }
-        #header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            color: #2632c3;
-            background: #bbdfffa3;
-            backdrop-filter: blur(10px);
-            font-weight: bold;
-        }
-        #results, #display {
-            z-index: 10;
-            pointer-events: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 16px;
-            overflow: auto;
-        }
 
-        #results {
-            color: #003880;
-            margin: 20px;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            text-Align: center;
-            font-Weight: bolder;
-            text-Shadow: rgb(153 167 175) -2px -1px 10px;
-        }
-
-        .clickable {
-            cursor: pointer;
-        }
-        #map{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            z-index: -1;
-        }
-        #map-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        .card {
-            background: #CF61CA;
-            padding: 8px;
-            display: flex;
-            width: 100%;
-            flex-direction: column;
-            justify-content: center;
-            white-space: nowrap;
-            flex-basis: auto;
-        }
-
-        #display {
-        align-self: flex-end;
-        }
-
-        .description {
-            display: flex;
-            justify-content: space-between;
-            white-space: nowrap;
-            gap: 8px;
-            color: #6361CF;
-            background: #bbdfffa3;
-        }
-        label {
-            font-weight: bold;
-        }
-        .temp {
-            display: flex;
-            justify-content: space-between;
-            white-space: nowrap;
-            gap: 8px;
-            color: #6361CF;
-            background: #6198CF;
-        }
-
-        .nav-wrapper {
-            background-color: #E8D2F1;
-        }
-    </style>
 </head>
 <body>
-<!-- nav/search bar from materialize
-<nav>
-    <div class="nav-wrapper">
-        <div class="input-field">
-          <input id="search" type="search" required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-    </div>
-</nav> -->
 
 
     <div id="container">
         <div id="map-container">
             <div id="map"></div>
+            <pre id="coordinates" class="coordinates"></pre>
             <input id="search"/>
-            <h4 id="results" ></h4>
+            <!-- <h4 id="results" ></h4> -->
         </div>
         <div id="display"></div>
     </div>
@@ -150,24 +41,6 @@
         zoom: 10 // starting zoom
     });
 
-    var display = $('#display')
-    var mapContainer = $('#map')
-    var results = $('#results')
-    var searchInput = $("#search")
-
-    //function to get the search bar to display input results
-    searchInput.change(function(event) {
-        var value = event.target.value
-        geocode(value, MAPBOX_API_TOKEN).then(function(result) {
-            marker.setLngLat(result);
-            map.flyTo({center: result});
-            getWeatherForLocation({
-                lat: result[0], 
-                lon: result[1]
-            })
-        });
-    })
-
     // map marker
     var marker = new mapboxgl.Marker({
         color: '#4bc936',
@@ -176,7 +49,63 @@
     .setLngLat([-97.741150,30.238148])
     .addTo(map);
 
-    function getWeatherForLocation({lat, lon}) {
+    
+    function onDragEnd() {        
+        const coordinates = marker.getLngLat();
+        var lat = coordinates.lat;
+        var lon = coordinates.lng;
+        getWeatherForLocation(lat,lon);
+        console.log(coordinates);
+    };
+    marker.on('dragend', onDragEnd);
+// whenever the drag ends we get the coor. of the marker and then we call getWeather for the lng/lat
+
+    var display = $('#display');
+    var mapContainer = $('#map');
+    var results = $('#results');
+    var searchInput = $("#search");
+
+    //function to get the search bar to display input results
+    searchInput.change(function(event) {
+        var value = event.target.value
+        geocode(value, MAPBOX_API_TOKEN).then(function(result) {
+            marker.setLngLat(result);
+            map.flyTo({center: result});
+//             reverseGeocode(result,
+//             MAPBOX_API_TOKEN).then(function(location) {
+//                 results.html('Results for: ${location}')
+//               })
+            getWeatherForLocation({
+                lat: result[0], 
+                lon: result[1]
+            })
+        });
+        var date = new Date(day.dt * 1000).toLocaleDateString();
+        var weather = day.weather[0];
+        //gets a new date for evryday on the cards
+        var card = $('<div class="card" />');
+        card.append(
+            // append divs to card for properties in day object
+            $('<div/>').append(date),
+    
+            $('<div class="description" />').append(
+            $('<label/>').append('Description:'),
+            $('<div/>').append(weather.description),
+            ),
+            $('<div class="temp" />').append(day.temp.day),
+            $(`<img width="50px" height="50px" src="http://openweathermap.org/img/w/${weather.icon}.png"/>`),
+            //string with js variables inside ${}
+            $('<div/>').append(day.humidity),
+            $('<div/>').append(day.wind_speed),
+            $('<div/>').append(day.pressure),
+                )
+                display.append(card);
+            });
+
+
+
+
+    function getWeatherForLocation(lat, lon) {
         display.html('');
         // sets the html to an empty string to clear anything that was previously there
         return $.ajax('https://api.openweathermap.org/data/2.5/onecall', {
@@ -191,48 +120,6 @@
             console.log(data);
             console.log(data.current.clouds);
             data.daily.forEach(function(day) {
-            //    {
-            //     "dt": 1629655200,
-            //     "sunrise": 1629633748,
-            //     "sunset": 1629680728,
-            //     "moonrise": 1629682860,
-            //     "moonset": 1629633660,
-            //     "moon_phase": 0.5,
-            //     "temp": {
-            //         "day": 94.77,
-            //         "min": 76.53,
-            //         "max": 96.55,
-            //         "night": 83.26,
-            //         "eve": 95.27,
-            //         "morn": 76.53
-            //     },
-            //     "feels_like": {
-            //         "day": 100.8,
-            //         "night": 84.79,
-            //         "eve": 96.48,
-            //         "morn": 78.12
-            //     },
-            //     "pressure": 1014,
-            //     "humidity": 44,
-            //     "dew_point": 69.46,
-            //     "wind_speed": 11.41,
-            //     "wind_deg": 173,
-            //     "wind_gust": 22.68,
-            //     "weather": [
-            //         {
-            //             "id": 801,
-            //             "main": "Clouds",
-            //             "description": "few clouds",
-            //             "icon": "02d"
-            //         }
-            //     ],
-            //     "clouds": 17,
-            //     "pop": 0,
-            //     "uvi": 10.05
-            // }
-        // Container for properties of the day object. 
-        // div element with css
-
                 var weather = day.weather[0];
                 var date = new Date(day.dt * 1000).toLocaleDateString();
                 //gets a new date for evryday on the cards
@@ -254,6 +141,7 @@
                 )
                 display.append(card);
             });
+        
     
         }).fail(function(error) {
             console.log(error);
@@ -267,21 +155,13 @@
             lat: 30.238148, 
             lon: -97.741150,
         })
-    })
-
-    marker.on('dragend', function onDragEnd() {
-        const coordinates = marker.getLngLat();
-        getWeatherForLocation({
-            lat: coordinates.lat, 
-            lon: coordinates.lng,
-        })
     });
-    // whenever the drag ends we get the coor. of the marker and then we call getWeather for the lng/lat
 
-    results.html('Results for: ' + searchInput)
 
+
+
+    // results.html('Results for: ')
 </script>
-<!--materialize JavaScript at end of body for optimized loading-->
-<!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
