@@ -71,10 +71,7 @@
         geocode(value, MAPBOX_API_TOKEN).then(function(result) {
             marker.setLngLat(result);
             map.flyTo({center: result});
-//             reverseGeocode(result,
-//             MAPBOX_API_TOKEN).then(function(location) {
-//                 results.html('Results for: ${location}')
-//               })
+
             getWeatherForLocation({
                 lat: result[0], 
                 lon: result[1]

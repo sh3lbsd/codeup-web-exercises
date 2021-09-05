@@ -53,6 +53,7 @@ const users = [
 ];
 
 // Use .filter to create an array of user objects where each user object has at least 3 languages in the languages array.
+
 let emails = users.map(user => user.email);
 console.log(emails);
 let trilinguals = users.filter(function (user) {
