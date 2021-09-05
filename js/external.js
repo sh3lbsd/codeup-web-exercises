@@ -1,4 +1,5 @@
 "use strict";
+(function () {
 
 console.log ("Hello from external JavaScript");
 
@@ -143,13 +144,14 @@ function isSameLength(str1, str2) {
 // var totalAB = a + b;
 // console.log('The result of num1 + num2 is: ' + totalAB);
 //
+
 // var c = 10;
 // var d = 5;
 // var totalCD = c + d;
 // console.log('The result of num1 + num2 is: ' + totalCD);
 
 
-
+})();
 
 
 
