@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax Blog</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<div id="post"></div>
+<script>
+    function getBlogPost() {
+        $(document).ready(function () {
+            $.get("data/blog.json").done(function (data) {
+                data.forEach(function (content) {
+                    $("#post").append('<h3>' + content.title + '<p>' + content.content + '<p>' + content.date + '</p>' + '<span>' + content.categories +'</span>');
+                });
+            });
+        });
+    }
+    getBlogPost();
+</script>
+</body>
+</html>
