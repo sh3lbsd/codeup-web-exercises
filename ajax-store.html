@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Online Store</title>
+  </head>
+  <body>
+    <h1>My Tool Store</h1>
+    <button id="refresh">Refresh</button>
+    <table id="products">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Categories</th>
+        </tr>
+      </thead>
+      <tbody id="insertProducts"></tbody>
+    </table>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      (function () {
+        "use strict";
+        // TODO: Take the data from inventory.json and append it to the products table HINT: Your data should come back as a JSON object; use console.log() to inspect its contents and fields
+        const table = $("#insertProducts");
+        // TODO: Create an AJAX GET request for the file under data/inventory.json
+        // Make function for loading the data so that we can call it later to refresh the page
+        function loadData() {
+        // set html to loading... to let the user know that the data is loading
+          table.html("loading...");
+          $.get("./data/inventory.json").done(function (data) {
+            // clear html so that refreshed data does not add to the table infinitely
+            table.html("");
+            // loop through each item in the data array and append a new table row 
+            // and table cells for each property of the item
+            data.forEach(({ title, quantity, categories, price }) => {
+              table.append(`
+                        <tr>
+                            <td>${title}</td>
+                            <td>${quantity}</td>
+                            <td>${price}</td>
+                            <td>${categories}</td>
+                        </tr>
+                    `);
+            });
+          });
+        }
+        // call load data explicitly so that the data is loaded when the user first gets to the page
+        loadData();
+
+        // Whenever the refresh button is clicked. Call the load data function to reload the data without refreshing the entire page
+        const refreshButton = $("#refresh").click(() => {
+          loadData();
+        });
+      })();
+    </script>
+  </body>
+</html>
